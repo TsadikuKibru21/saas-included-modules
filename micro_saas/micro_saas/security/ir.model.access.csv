@@ -1,0 +1,14 @@
+id,name,model_id:id,group_id:id,perm_read,perm_create,perm_write,perm_unlink
+acces_docker_compose_tag,access_docker_compose_tag,model_docker_compose_tag,,1,1,1,1
+acces_odoo_docker_instance,access_odoo_docker_instance,model_odoo_docker_instance,,1,1,1,1
+acces_repository_repository,access_repository_repository,model_repository_repo,,1,1,1,1
+acces_repository_repository_line,access_repository_repository_line,model_repository_repo_line,,1,1,1,1
+acces_docker_compose_template_user,access_docker_compose_template_user,model_docker_compose_template,,1,1,1,1
+acces_docker_compose_template_variable_user,access_docker_compose_template_variable_user,model_docker_compose_template_variable,,1,1,1,1
+access_add_resource_wizard_manager,Access add_resource_wizard,model_add_resource_wizard,,1,1,1,1
+access_update_expiration_wizard,Access update_expiration_wizard,model_update_expiration_wizard,,1,1,1,1
+access_docker_container_backup,Access docker_container_backup,model_docker_container_backup,,1,1,1,0
+
+access_docker_backup_cridential,Access docker_backup_cridential,model_docker_backup_cridential,,1,1,1,1
+access_tenant_server,Access tenant_server,model_tenant_server,,1,1,1,1
+

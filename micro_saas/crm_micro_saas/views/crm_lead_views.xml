@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <!-- Inherit the existing CRM Lead form view -->
+        <record id="view_create_crm_lead_form_inherit" model="ir.ui.view">
+            <field name="name">crm.lead.form.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+             <xpath expr="//header" position="inside">
+                <button name="action_validate_lead" string="Validate" type="object" class="btn-primary" invisible="is_validated != False" confirm="Are you sure you want to proceed?"
+                       />
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="before">
+                 <field name="docker_compose_template"/>
+                 <field name="is_validated" invisible="1"/>
+                 
+            </xpath>
+               
+            </field>
+        </record>
+
+        
+
+      
+    </data>
+</odoo>

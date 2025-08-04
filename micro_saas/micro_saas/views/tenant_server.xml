@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<record id="view_tenant_server_kanban" model="ir.ui.view">
+    <field name="name">tenant.server.kanban</field>
+    <field name="model">tenant.server</field>
+    <field name="arch" type="xml">
+        <kanban default_group_by="is_active">
+            <!-- Color based on active field: green (1) for active, gray (8) for inactive -->
+            <field name="is_active"/>
+            <templates>
+                <t t-name="kanban-box">
+                    <div t-attf-class="oe_kanban_card oe_kanban_global_click #{record.active.raw_value ? 'oe_kanban_color_1' : 'oe_kanban_color_8'}">
+                        <div class="oe_kanban_details">
+                            <strong><field name="name"/></strong>
+                            <div>IP: <field name="ip_address"/></div>
+                            <div>SSH User: <field name="ssh_user"/></div>
+                            <div>Total Instances: <field name="total_instance"/></div>
+                            <div>Current Instances: <field name="current_instance"/></div>
+                            <div>Remaining Instances: <field name="remaining_instance"/></div>
+                        </div>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
+    <!-- Tree View -->
+    <record id="view_tenant_server_tree" model="ir.ui.view">
+        <field name="name">tenant.server.tree</field>
+        <field name="model">tenant.server</field>
+        <field name="arch" type="xml">
+            <tree string="Tenant Servers">
+                <field name="name"/>
+                <field name="ip_address"/>
+                <field name="ssh_user"/>
+                <field name="ssh_port"/>
+                <field name="is_active"/>
+                <field name="total_instance"/>
+                <field name="current_instance"/>
+                <field name="remaining_instance"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View -->
+<record id="view_tenant_server_form" model="ir.ui.view">
+    <field name="name">tenant.server.form</field>
+    <field name="model">tenant.server</field>
+    <field name="arch" type="xml">
+        <form string="Tenant Server">
+            <header>
+             <button name="test_ssh_connection" 
+                            string="Test Connection" 
+                            type="object" 
+                            class="btn-primary" />
+            </header>
+            <sheet>
+            <group>
+                <group>
+                    <field name="name"/>
+                    <field name="ip_address"/>
+                    <field name="ssh_user"/>
+                    <field name="ssh_password" password="True"/>
+                    <field name="ssh_port"/>
+                    <field name="is_active"/>
+                </group>
+                <group string="Instance Capacity">
+                    <field name="total_instance"/>
+                    <field name="current_instance" readonly="1"/>
+                    <field name="remaining_instance" readonly="1"/>
+                </group>
+               </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+ 
+</odoo>
