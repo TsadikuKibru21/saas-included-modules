@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_pos_download_wizard_form" model="ir.ui.view">
+        <field name="name">log.form</field>
+        <field name="model">pos.log.download</field>
+        <field name="arch" type="xml">
+            <form string="Download Logs">
+                <group>
+                    <field name="password" password="True" 
+                    required="1"
+                    />
+                </group>
+                <footer>
+                    <button string="Download" type="object" class="btn-primary"
+                        name="action_confirm" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_my_wizard" model="ir.actions.act_window">
+        <field name="name">Download Logs</field>
+        <field name="res_model">pos.log.download</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_pos_download_wizard_form" />
+        <field name="target">new</field>
+    </record>
+    <menuitem id="menu_action_pos_event_log"
+        action="action_my_wizard"
+        parent="point_of_sale.menu_point_config_product"
+        sequence="100" />
+
+</odoo>

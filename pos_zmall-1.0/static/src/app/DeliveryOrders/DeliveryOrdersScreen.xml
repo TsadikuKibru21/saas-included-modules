@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_etta.DeliveryOrdersScreen">
+        <div class="delivery-screen screen h-100 d-flex flex-column bg-light">
+            <!-- Header/Toolbar -->
+            <header class="screen-header bg-white shadow-sm p-3">
+                <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                    <!-- Left side buttons -->
+                    <div class="d-flex gap-2">
+                        <button t-if="state.detailIsShown" 
+                                class="btn btn-primary d-flex align-items-center" 
+                                t-on-click="() => this.partnerEditor.save()">
+                            <i class="fa fa-floppy-o me-2"/>
+                            <span t-if="!ui.isSmall">Save</span>
+                        </button>
+                        
+                        <button class="btn btn-outline-secondary d-flex align-items-center" 
+                                t-on-click="back">
+                            <i class="fa fa-angle-left me-2"/>
+                            <span t-if="!ui.isSmall">Back</span>
+                        </button>
+                    </div>
+
+                    <!-- Center buttons -->
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-info d-flex align-items-center" 
+                                t-on-click="showDeliveryProductScreen">
+                            <i class="fa fa-box me-2"/>
+                            <span t-if="!ui.isSmall">Products</span>
+                        </button>
+                        
+                        <button class="btn btn-info d-flex align-items-center" 
+                                t-on-click="showDeliveryProductSync">
+                            <i class="fa fa-sync me-2"/>
+                            <span t-if="!ui.isSmall">Sync Products</span>
+                        </button>
+                    </div>
+
+                    <!-- Right side buttons -->
+                    <div class="d-flex gap-2">
+                        <t t-if="state.detailIsShown and state.editModeProps.partner.id">
+                            <button class="btn btn-outline-primary d-flex align-items-center" 
+                                    t-on-click="goToOrders">
+                                <i class="fa fa-shopping-cart me-2"/>
+                                <span t-if="!ui.isSmall">Orders</span>
+                            </button>
+                            
+                            <a t-att-href="partnerLink" 
+                               class="btn btn-outline-secondary d-flex align-items-center" 
+                               target="_blank">
+                                <i class="fa fa-info-circle me-2"/>
+                                <span t-if="!ui.isSmall">Details</span>
+                            </a>
+                        </t>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <div class="flex-grow-1 overflow-auto p-3">
+                <t t-if="state.detailIsShown">
+                    <!-- Detail view content here -->
+                </t>
+                <t t-else="">
+                    <div class="card shadow-sm">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="bg-light">
+                                    <tr>
+                                        <th class="border-0">Customer</th>
+                                        <th class="border-0">Total</th>
+                                        <th class="border-0">Items</th>
+                                        <th class="border-0">Status</th>
+                                        <th class="border-0 text-end">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-if="getMoves and getMoves.length >= 1">
+                                        <t t-foreach="getMoves" t-as="order" t-key="order.zmall_order_id">
+                                            <DeliveryOrderLine 
+                                                order="order"
+                                                selectedOrder="state.selectedOrder"
+                                                CancelOrderButton.bind="CancelOrderButton"
+                                                onClickOrder.bind="clickOrder"
+                                                clickOrderLineEtta.bind="clickOrderLineEtta"
+                                                onClickCartButton.bind="clickCartButton"
+                                                handleaddposorder.bind="handleaddposorder"
+                                            />
+                                        </t>
+                                    </t>
+                                    <tr t-if="!getMoves or getMoves.length === 0">
+                                        <td colspan="5" class="text-center py-4 text-muted">
+                                            <i class="fa fa-inbox fa-2x mb-2 d-block"/>
+                                            No delivery orders found
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </div>
+    </t>
+
+</templates>
+
+
+
+
+
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_etta.DeliveryOrdersScreen">
+        <div class="partnertree-screen screen h-100 d-flex flex-column bg-100">
+            <div class="top-content d-flex align-items-center p-2 border-bottom text-center">
+                <div class="button highlight btn btn-lg btn-primary" t-if="state.detailIsShown" t-on-click="() => this.partnerEditor.save()">
+                    <i t-if="ui.isSmall" class="fa fa-floppy-o"/>
+                    <t t-else="">
+                        <span> Save</span>
+                    </t>
+                </div>
+                <div class="button back btn btn-lg btn-secondary mx-2" t-on-click="back">
+                    <i t-if="ui.isSmall" class="fa fa-angle-double-left"/>
+                    <t t-else=""> Discard</t>
+                </div>
+
+                <div class="button products btn btn-lg btn-info mx-2" t-on-click="showDeliveryProductScreen">
+                    <i t-if="ui.isSmall" class="fa fa-tree"/>
+                    <t t-else=""> Delivery Product Screen</t>
+                </div>
+                <div class="button products btn btn-lg btn-info mx-2" t-on-click="showDeliveryProductSync">
+                    <i t-if="ui.isSmall" class="fa fa-tree"/>
+                    <t t-else=""> Delivery Product Sync</t>
+                </div>
+
+                
+
+
+
+                <div class="top-right-buttons d-flex gap-2 w-100 justify-content-end">
+                    <div t-if="state.detailIsShown and state.editModeProps.partner.id" class="button more-info">
+                        <a t-on-click="goToOrders" class="btn btn-lg btn-outline-secondary" target="_blank"> Orders </a>
+                    </div>
+                    <div t-if="state.detailIsShown &amp;&amp; state.editModeProps.partner.id" class="button more-info">
+                        <a t-att-href="partnerLink" class="btn btn-lg btn-outline-secondary" target="_blank"> More info</a>
+                    </div>
+                <div class="search-bar-container sb-partner d-flex align-items-center w-100 w-lg-50 h-100 h-100" t-if="!state.detailIsShown">
+                        <div class="fa fa-times position-absolute end-0 me-2 pe-1 cursor-pointer" t-on-click="back">
+                        <i t-if="ui.isSmall" class="fa fa-angle-double-left"/>
+                        <t t-else=""> </t>
+                    </div>
+                </div>
+
+
+
+
+
+
+                </div>
+            </div>
+             
+                 
+            <section class="overflow-auto">
+                <t t-if="state.detailIsShown">
+                 
+
+                </t>
+
+               
+               
+
+
+
+
+                <t t-else="">
+                    <table class="partner-tree table table-striped w-100">
+                        <thead>
+                            <tr>
+                                <th class="py-2">Name</th>
+                                <th class="py-2">Total Price</th>
+                                <th class="partner-line-email py-2">item</th>
+                                <th class="py-2">State</th>
+                               
+                                <th class="partner-line-details py-2"></th>
+                                <th class="partner-line-last-column-placeholder oe_invisible py-2"></th>
+                            </tr>
+                        </thead>
+                      
+                    <tbody class="order-tree-contents">
+                        <t t-if="getMoves and getMoves.length and   getMoves.length>=1">
+                            <t t-if="getMoves and getMoves.length>=1 " t-foreach="getMoves" t-as="order" t-key="order.zmall_order_id">
+                                <DeliveryOrderLine order="order"
+                                                selectedOrder="state.selectedOrder"
+                                               CancelOrderButton.bind = "CancelOrderButton"
+                                                onClickOrder.bind="clickOrder"
+                                                clickOrderLineEtta.bind="clickOrderLineEtta"
+                                                onClickCartButton.bind="clickCartButton"
+                                                handleaddposorder.bind = "handleaddposorder"
+                                                />
+                            </t>
+                        </t>
+                </tbody>
+
+                
+
+                    </table>
+               
+                </t>
+            </section>
+        </div>
+    </t>
+
+</templates> -->
+
+
+
+
+
+
+

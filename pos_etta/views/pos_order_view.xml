@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Extend the POS Order Form View to add service_charge in the order line tree view -->
+    <record id="view_pos_order_form_inherit_service_charge" model="ir.ui.view">
+        <field name="name">pos.order.form.inherit.service.charge</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form" />
+        <field name="arch" type="xml">
+            <!-- Add service_charge to the Tree View under the Products page -->
+            <!-- <xpath expr="//page[@name='products']/field[@name='lines']/tree/field[@name='discount']"
+                position="after">
+                <field name="service_charge" />
+            </xpath> -->
+            <!-- Add service_charge to the Form View under the Products page -->
+            <!-- <xpath
+                expr="//page[@name='products']/field[@name='lines']/form//field[@name='discount']"
+                position="after">
+                <field name="service_charge" />
+            </xpath> -->
+
+            <xpath expr="//field[@name='tracking_number']" position="after">
+                <field name="ej_checksum" readonly="1" />
+                <field name="checked" readonly="1" />
+                <field name="is_refund" readonly="1" />
+                <field name="synced_mrc" readonly="1" widget="text" />
+            </xpath>
+            <xpath expr="//field[@name='partner_id']" position="after">
+                <field name="fs_no" readonly="1" invisible="is_refund" />
+                <field name="rf_no" readonly="1" invisible="not is_refund" />
+                <field name="fiscal_mrc" readonly="1" />
+            </xpath>
+
+            <!-- <xpath expr="//field[@name='amount_tax']" position="before">
+                <field name="service_charge_amount" force_save="1" widget="monetary" />
+            </xpath> -->
+
+        </field>
+    </record>
+
+    <!-- <record id="view_pos_order_tree_inherit" model="ir.ui.view">
+        <field name="name">pos.order.tree.inherit</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_order_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <field name="service_charge_amount" sum="Total Service Charge"/>
+            </xpath>
+        </field>
+    </record> -->
+</odoo>

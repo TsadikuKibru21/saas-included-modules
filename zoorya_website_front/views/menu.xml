@@ -1,0 +1,10 @@
+<odoo>
+    <data>
+        <record id="menu_home_page" model="website.menu">
+            <field name="name">Home Page</field>
+            <field name="url">/home_page</field>
+            <field name="parent_id" ref="website.main_menu" />
+            <field name="sequence" eval="100" />
+        </record>
+    </data>
+</odoo>

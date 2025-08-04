@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <!-- Inherit the form view of hr.employee to add the is_waiter field -->
+        <record id="view_hr_employee_form_inherit_waiter" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherit.waiter</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='work_location_id']" position="after">
+                    <field name="is_restaurant_enabled" invisible="1"/>
+                    <field name="is_waiter"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

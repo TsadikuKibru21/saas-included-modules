@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="se_ssh_auth_view_form" model="ir.ui.view">
+        <field name="name">se.ssh.auth.view.form</field>
+        <field name="model">se.ssh.auth</field>
+        <field name="arch" type="xml">
+            <form string="Generate/Upload SSH Key">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="server" readonly="1"/>
+                        </h1>
+                        <div name="strategies">
+                            <div>
+                                <field name="strategy" widget="radio"/>
+                            </div>
+                        </div>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="user_name" class="oe_inline"/>
+                            <field name="password" password="True" class="oe_inline" modifiers="{'invisible': [['strategy', '=', 'upload']]}"/>
+                        </group>
+                        <group>
+                            <field name="ssh_key" modifiers="{'invisible': [['strategy', '=', 'generate']], 'required': [['strategy', '=', 'upload']]}"/>
+                            <field name="ssh_password" password="True" class="oe_inline" modifiers="{'invisible': [['strategy', '=', 'generate']]}"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="connect" string="Connect" type="object" class="oe_highlight" />
+                        <button string="Cancel" class="oe_left oe_highlight" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+</odoo>

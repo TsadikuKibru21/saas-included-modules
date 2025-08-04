@@ -1,0 +1,17 @@
+<odoo>
+    <record id="view_sale_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <field name="is_instance_created" invisible="1"/>
+                <button name="action_create_instance" 
+                        type="object" 
+                        string="Create Instance" 
+                        class="oe_highlight" 
+                        invisible="is_instance_created"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,28 @@
+<odoo>
+    <template id="shop_template" name="Home">
+        <t t-call="website.layout">
+            <t t-set="title">Zoorya : Shop</t>
+            <section class="custom-pricing">
+                <h2 class="custom-pricing-title">Choose your plan</h2>
+                <p class="custom-pricing-subtitle">Get your POS system with a one-time payment and
+                    flexible plans.</p>
+
+                <section class="category-selector">
+                    <div class="category-tree">
+                        <t t-foreach="categories" t-as="category">
+                            <button class="category-btn" t-att-data-category-id="category.id">
+                                <t t-esc="category.name" />
+                            </button>
+                        </t>
+                    </div>
+                </section>
+
+                <section class="saas-product-treeing">
+                    <div class="products">
+                    </div>
+                </section>
+
+            </section>
+        </t>
+    </template>
+</odoo>

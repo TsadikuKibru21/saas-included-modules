@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="point_of_sale.DeliveryProductLine">
+        <tr class="product-line align-middle" t-att-data-id="props.order.category_id">
+            <!-- Name and Price -->
+            <td style="width: 30%">
+                <div class="d-flex flex-column">
+                    <span class="fw-bold mb-1">
+                        <t t-esc="props.order.name or ''" />
+                    </span>
+                    <span class="badge bg-light text-dark">
+                        <t t-esc="props.order.price or ''" />
+                    </span>
+                </div>
+            </td>
+
+            <!-- Items -->
+            <td style="width: 40%">
+                <t t-if="props.order and props.order.cart_items and props.order.cart_items.length > 0">
+                    <div class="small">
+                        <t t-foreach="props.order.cart_items" t-as="item" t-key="item.unique_id">
+                            <div class="d-flex align-items-center mb-1">
+                                <i class="fa fa-tag text-muted me-2"/>
+                                <span class="text-truncate"><t t-esc="item.full_product_name"/></span>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </td>
+
+            <!-- Visibility Status -->
+            <td style="width: 30%" class="text-end">
+                <button t-if="props.order.is_visible_in_store" 
+                        t-on-click.stop="()=> this.handleOrderLineClick(props.order)" 
+                        class="btn btn-sm btn-success">
+                    <i class="fa fa-eye me-1"/>Visible
+                </button>
+                <button t-else="" 
+                        t-on-click.stop="() => this.handleOrderLineClick(props.order)" 
+                        class="btn btn-sm btn-secondary">
+                    <i class="fa fa-eye-slash me-1"/>Hidden
+                </button>
+            </td>
+        </tr>
+    </t>
+</templates>
+
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="point_of_sale.DeliveryProductLine">
+     <tr t-attf-class="order-line gap-2 gap-lg-0 align-top {{highlight}}" t-att-data-id="props.order.category_id"
+            t-on-click="() => this.props.onClickOrder(props.order)">
+            <td>
+                <b>
+                    <t t-esc="props.order.name or ''" />
+                </b>
+                <div class="company-field text-bg-muted">
+                    <t t-esc="props.order.price or ''" />
+                </div>
+            </td>
+            <td>
+                <div class="order-line-total-price" t-if="props.order.price">
+                    <t t-esc="props.order.price" />
+                </div>
+            </td>
+            <td class="order-line-items">
+                <t t-if="props.order and props.order.cart_items and props.order.cart_items.length >0 ">
+                    <t t-if="props.order and Array.isArray(props.order.cart_items)" t-foreach="props.order.cart_items" t-as="item" t-key="item.unique_id">
+                        <div>
+                            <i class="fa fa-fw fa-tag me-2"/><t t-esc="item.full_product_name"/>
+                        </div>
+                    </t>
+                </t>
+            </td>
+            <td style="edit-order-button-cell">
+                                            <t t-if="props.order and props.order.is_visible_in_store == true">
+                                                <button t-on-click="()=> this.handleOrderLineClick(props.order)" class="highlight edit-order-button btn btn-primary border">Visible</button>
+                                            </t>
+                                            <t t-if="props.order and props.order.is_visible_in_store==false">
+                                                <button  t-on-click="() => this.handleOrderLineClick(props.order)" class="highlight edit-order-button btn btn-warning border">Invisible</button>
+                                            </t>
+                                            
+
+                                        </td>
+          
+            <td class="order-line-last-column-placeholder oe_invisible"></td>
+        </tr> 
+
+
+
+    </t>
+
+    </templates> -->
+
+
+
+
+                      <!-- <t t-if="props.order and props.order.order_status == 5">
+                                                <button  t-on-click=" ()=> this.handleOrderLineClick(props.order)" class="highlight edit-order-button btn btn-info border">Prepared</button>
+                                            </t>
+                                            <t t-if="props.order and props.order.order_status == 7">
+                                                <button  t-on-click="()=> this.handleOrderLineClick(props.order)" class="highlight edit-order-button btn btn-success border">Ready</button>
+                                            </t> -->
+
+                                        
+             <!-- <td class="edit-order-button-cell">
+                <button class="edit-order-button btn btn-info border" t-on-click.stop="() => this.handleCancelOrderButton(props.order)">order</button>
+            </td> -->
+            <!-- <td class="edit-order-button-cell">
+                <button class="edit-order-button btn btn-info border" t-on-click.stop="() => this.handleonClickCartButton(props.order)">DETAILS</button>
+            </td> -->
+            
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- <table class="table"> -->
+
+
+
+            
+            <!-- <tbody>
+                <tr t-foreach="orders" t-as="order" t-att-data-id="order.unique_id"  t-key="order.category_id">
+                    <td>
+                        <b><t t-esc="order.customer_name or ''"/></b>
+                        <div class="company-field text-bg-muted">
+                            <t t-esc="order.created_at or ''"/>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="order-line-total-price">
+                            <t t-esc="order.total_cart_price"/>
+                        </div>
+                    </td>
+                    <td>
+                        <ul>
+                            <li t-foreach="order.cart_items" t-as="item"  t-key="order.item_id">
+                                <t t-esc="item.full_product_name"/> - <t t-esc="item.total_item_price"/>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <span t-if="order.order_status == 1" class="badge bg-primary">New</span>
+                        <span t-if="order.order_status == 3" class="badge bg-warning">Accepted</span>
+                        <span t-if="order.order_status == 5" class="badge bg-info">Prepared</span>
+                        <span t-if="order.order_status == 7" class="badge bg-success">Ready</span>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" t-on-click.stop="() => this.handleCancelOrderButton(order)">Cancel</button>
+                        <button class="btn btn-info" t-on-click.stop="() => this.handleDetailsButton(order)">Details</button>
+                    </td>
+                </tr>
+            </tbody> -->
+        <!-- </table> -->
+    <!-- </t> -->

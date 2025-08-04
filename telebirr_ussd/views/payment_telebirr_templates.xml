@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<odoo>
+<template id="custom_payment_method_form" inherit_id="payment.method_form" name="Custom Payment Method Form">
+    <xpath expr="//p[@name='o_payment_secured_by']/span" position="replace">
+        <!-- Removed "Secured by" span -->
+    </xpath>
+</template>
+
+    <template id="redirect_form">
+        <form t-att-action="api_url" method="GET">
+        
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+        </form>
+    </template>
+   
+   <template id="telebirr_ussd_inline_form_view">
+               
+     <div class="col mt-3 mb-0">
+        <div class="d-flex align-items-center">
+            <label for="telebirr_phone" class="form-label mb-0 me-2">Phone Number</label>
+             <span class="prefix btn btn-outline-success me-2">+251</span>
+            <input type="text" t-ref="telebirr_phone"
+                   name="telebirr_phone"
+                   id="telebirr_phone"
+                   class="form-control"
+                   placeholder="9XXXXXXXX"
+                   required="required"
+                   pattern="\d{9}"
+                   title="Please enter a valid 9-digit phone number."/>
+        </div>
+    </div>
+    <style>
+    .form-control{
+        margin-left: 0rem;
+    }
+        .prefix {
+            font-weight: bold;
+            white-space: nowrap; /* Prevents the prefix from breaking to a new line */
+        }
+        .form-label {
+            font-weight: bold;
+            margin-bottom: 0; /* Removes bottom margin from label */
+            white-space: nowrap; /* Prevents the label from wrapping to a new line */
+      
+        }
+  
+        .mt-3 {
+            margin-top: 1rem; /* Adds space at the top */
+        }
+        .me-2 {
+            margin-right: 0rem; 
+        }
+    </style> 
+    </template>
+
+
+
+
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_etta.PartnerDetailsEdit" t-inherit="point_of_sale.PartnerDetailsEdit" t-inherit-mode="extension">
+        <xpath expr="//div[contains(@class, 'partner-detail')][3]" position="after">
+            <div t-if="pos.hasAccess(pos.config['discount_access_level'])" class="partner-detail col">                                                           
+                <label class="form-label label" for="vat">Discount</label>                           
+                <input class="detail vat form-control" id="discount_customer" name="discount_customer" t-model="changes.discount_customer" t-att-class="{'border-danger': missingFields.includes('discount_customer')}" />
+            </div>     
+        </xpath>
+    </t>
+</templates>

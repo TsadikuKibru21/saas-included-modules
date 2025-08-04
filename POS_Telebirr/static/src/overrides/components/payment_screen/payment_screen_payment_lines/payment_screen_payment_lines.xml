@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_redelcom.PaymentScreenPaymentLines" t-inherit="point_of_sale.PaymentScreenPaymentLines" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('paymentline')]" position="after">
+            <input name="Phone" type="number" t-model="orderUiState.Phone" placeholder="Phone Number" style="font-size: 16px; font-family: Arial, sans-serif; border: 2px solid #4CAF50; border-radius: 7px; outline: none; transition: border-color 0.3s ease, box-shadow 0.3s ease;" onfocus="this.style.borderColor='#FF5722'; this.style.boxShadow='0 0 8px rgba(255, 87, 34, 0.8)';" onblur="this.style.borderColor='#4CAF50'; this.style.boxShadow='none';" onmouseover="this.style.borderColor='#008CBA';" onmouseout="this.style.borderColor='#4CAF50';" t-if="line.payment_method.use_payment_terminal == 'telebirr'"/>
+            <input id="trace_number" type="text" style="display: none;" />
+            <div class="button sendPaymentRequest" title="sendPaymentRequest" t-on-click="() => this.props.sendPaymentRequest(line)">
+            </div>
+            </xpath>
+            <xpath expr="//div[hasclass('electronic_payment')]" position="after">         
+            <div class="button">
+            </div>
+        </xpath>
+    </t>
+</templates>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="payment_provider_form" model="ir.ui.view">
+        <field name="name">Telebirr Ussd Payment Gateway</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <group name="provider_credentials" position="inside">
+                <group invisible="code != 'telebirr_ussd'">
+                
+                    <field name="telebirr_ussd_url" string="URL" required="code == 'telebirr_ussd' and state != 'disabled'" />
+                    <field name="telebirr_ussd_api_key" string="API Key" required="code == 'telebirr_ussd' and state != 'disabled'" />
+                    <field name="telebirr_ussd_app_id" string="APP ID" required="code == 'telebirr_ussd' and state != 'disabled'" password="True"/>
+                    <field name="telebirr_ussd_payer_id" string="PAYER ID" required="code == 'telebirr_ussd' and state != 'disabled'" password="True"/>
+                    
+                </group>
+            </group>
+        </field>
+    </record>
+
+
+</odoo>

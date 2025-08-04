@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_etta.OrderWidget" t-inherit="point_of_sale.OrderWidget" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('order-container')]" position="inside">
+            <div>
+               <br/>
+                <t t-if="getVoidedItems()?.length">
+                    <p style="text-align: center; font-weight: bold;">VOIDED ORDERLINES</p>
+                    <div t-foreach="getVoidedItems()" t-as="order" t-key="order_index" class="order-container bg-view overflow-y-auto flex-grow-1 d-flex flex-column text-start">
+                        <div class="d-flex justify-content-between">
+                            <div class="product-name d-inline-block flex-grow-1 fw-bolder pe-1 text-truncate" style="color: red;">
+                               <span style="padding-right: 5px;"></span>
+                               <span t-esc="order.productName" style="color: red;"/><t t-slot="product-name"/>
+                                <div>
+                                <span style="padding-right: 15px;"></span>
+                                    <span t-esc="order.quantity"/> Units X $ <span t-esc="order.unitPrice"/> /Unit
+                                </div>
+                            </div>
+                            <div class="product-price d-inline-block text-end price fw-bolder" style="color: red;">
+
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </div>
+        </xpath>
+
+    </t>
+</templates>

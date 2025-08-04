@@ -1,0 +1,599 @@
+/* ==========================================================================
+   Global Styles
+   ========================================================================== */
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* ==========================================================================
+   Hero Section Styles
+   ========================================================================== */
+
+.custom-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.custom-hero-content {
+    max-width: 50%;
+}
+
+.custom-hero-title {
+    font-size: 60px;
+    font-weight: 900;
+    color: #0a0a0a;
+    line-height: 1.1;
+}
+
+.custom-hero-subtitle {
+    font-size: 20px;
+    color: #7a7a7a;
+    margin-top: 10px;
+}
+
+.custom-hero-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    background: #007bff;
+    color: #fff;
+    font-size: 18px;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+}
+
+.custom-hero-btn:hover {
+    background: #0056b3;
+}
+
+.custom-hero-image img {
+    max-width: 500px;
+    height: auto;
+}
+
+@media (max-width: 900px) {
+    .custom-hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .custom-hero-content {
+        max-width: 100%;
+    }
+
+    .custom-hero-image img {
+        max-width: 100%;
+        margin-top: 20px;
+    }
+}
+
+/* ==========================================================================
+   Pricing Section Styles
+   ========================================================================== */
+
+.custom-pricing {
+    text-align: center;
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.custom-pricing-title {
+    font-size: 36px;
+    font-weight: 900;
+    color: #0a0a0a;
+}
+
+.custom-pricing-subtitle {
+    font-size: 18px;
+    color: #6c757d;
+    margin-bottom: 30px;
+}
+
+.custom-pricing-plans {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.custom-pricing-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 320px;
+    position: relative;
+}
+
+.custom-pricing-card-price {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.custom-pricing-card-desc {
+    font-size: 14px;
+    color: #6c757d;
+    margin: 0;
+}
+
+.custom-pricing-monthly {
+    font-size: 16px;
+    margin: 0;
+}
+
+.custom-plus-icon {
+    font-weight: bold;
+    margin: 0;
+}
+
+.custom-pricing-btn {
+    display: inline-block;
+    background: #0a0a0a;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 5px;
+    width: 100%;
+}
+
+.custom-pricing-btn-featured {
+    background: #007bff;
+}
+
+.custom-pricing-toggle {
+    margin-bottom: 21px;
+}
+
+/* ==========================================================================
+   Billing Toggle Styles
+   ========================================================================== */
+
+.custom-billing-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.custom-billing-toggle input {
+    display: none;
+}
+
+.custom-billing-toggle .slider {
+    width: 50px;
+    height: 25px;
+    background: #ccc;
+    border-radius: 15px;
+    position: relative;
+    cursor: pointer;
+}
+
+.custom-billing-toggle .slider::before {
+    content: "";
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    transform: translateY(-50%);
+    transition: 0.3s;
+}
+
+.custom-billing-toggle input:checked+.slider {
+    background: #007bff;
+}
+
+.custom-billing-toggle input:checked+.slider::before {
+    left: 26px;
+}
+
+/* ==========================================================================
+   Carousel Styles
+   ========================================================================== */
+
+.custom-hardware-carousel {
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.custom-carousel {
+    text-align: center;
+}
+
+.custom-carousel img {
+    width: 100%;
+    max-height: 150px;
+    object-fit: contain;
+    transition: transform 0.3s ease-in-out;
+}
+
+.custom-hardware-name {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+}
+
+.custom-carousel-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-btn {
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    background-color: #28A9DF;
+    color: white;
+    border: none;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.carousel-btn.left {
+    left: 0px;
+}
+
+.carousel-btn.right {
+    right: 0px;
+}
+
+/* ==========================================================================
+   Hardware Quantity and Checkbox Styles
+   ========================================================================== */
+
+.custom-hardware-quantity {
+    display: none;
+    /* Default hidden state */
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    transition: display 0.3s ease;
+}
+
+.custom-select-checkbox {
+    display: inline-block;
+    /* Ensure visibility */
+}
+
+.custom-select-checkbox+label:before {
+    content: none;
+    /* Remove default label content */
+}
+
+.custom-select-checkbox:checked+label:before {
+    content: none;
+    /* Remove default label content */
+}
+
+.custom-select-checkbox {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #28a745;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-right: 5px;
+    position: relative;
+}
+
+.custom-select-checkbox:checked {
+    background-color: #28a745;
+}
+
+.custom-select-checkbox:checked:after {
+    content: "✓";
+    color: white;
+    font-size: 14px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.quantity-btn {
+    font-size: 20px;
+    background-color: #28A9DF;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.quantity-btn:hover {
+    background-color: #45a049;
+}
+
+.quantity-input {
+    width: 50px;
+    text-align: center;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    padding: 5px;
+    margin: 0;
+}
+
+.quantity-input:focus {
+    outline: none;
+    border-color: #28A9DF;
+}
+
+/* Hide quantity controls by default, show when selected */
+.custom-hardware-quantity[style*="display: none"] {
+    display: none !important;
+}
+
+/* ==========================================================================
+   Features List Styles
+   ========================================================================== */
+
+.custom-pricing-features {
+    display: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.custom-pricing-features li {
+    padding: 5px 0;
+}
+
+/* ==========================================================================
+   Collapsible Button Styles
+   ========================================================================== */
+
+.collapsible-btn {
+    background-color: #28A9DF;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    margin-top: 10px;
+}
+
+.collapsible-btn:focus {
+    outline: none;
+}
+
+.collapsible-btn.active {
+    background-color: #3e8e41;
+}
+
+/* ==========================================================================
+   Arrow Down Button Styles
+   ========================================================================== */
+
+.arrow-down {
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 20px;
+    cursor: pointer;
+    background: #28a745;
+    color: white;
+    padding: 5px 14px;
+    border: none;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.arrow-down:hover {
+    background: #218838;
+    transform: translateX(-50%) scale(1.1);
+}
+
+.arrow-down:active {
+    transform: translateX(-50%) scale(0.95);
+}
+
+/* ==========================================================================
+   Pricing Section Layout Styles
+   ========================================================================== */
+
+section#pricing {
+    display: block;
+    position: static;
+    width: 915.333px;
+    height: 844px;
+    padding: 64px 24px;
+    margin: 0;
+    background-color: rgb(243, 243, 243);
+    border: 0px solid rgb(229, 231, 235);
+    box-shadow: none;
+}
+
+.max-w-5xl.mx-auto {
+    display: block;
+    position: static;
+    width: 867.333px;
+    height: 716px;
+    padding: 0;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0px solid rgb(229, 231, 235);
+    box-shadow: none;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
+    text-align: start;
+    flex-direction: row;
+    align-items: normal;
+    justify-content: normal;
+}
+
+.custom-select-hardware {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0;
+}
+
+.custom-select-hardware label {
+    font-size: 14px;
+    margin-left: 5px;
+    color: #333;
+}
+
+.custom-hardware-quantity {
+    display: none;
+    /* Default hidden state */
+}
+
+.custom-hardware-quantity.selected {
+    display: flex;
+    /* Show when selected */
+}
+
+.custom-select-hardware {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px 0;
+}
+
+.custom-select-hardware label {
+    font-size: 14px;
+    margin-left: 5px;
+    color: #333;
+}
+
+.clients-section {
+    background-color: #28A9DF;
+    padding-top: 70px;
+    text-align: center;
+}
+
+.clients-section h2 {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.clients-logos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    flex-wrap: wrap;
+}
+
+.logox {
+    background-color: #fff;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.logox img {
+    max-width: 80%;
+    max-height: 80%;
+    object-fit: contain;
+}
+
+
+.waves {
+    position: relative;
+    width: 100%;
+    height: 15vh;
+    margin-bottom: -7px;
+    /*Fix for safari gap*/
+    min-height: 100px;
+    max-height: 150px;
+    margin-top: 20px;
+}
+
+.content {
+    position: relative;
+    height: 20vh;
+    text-align: center;
+    background-color: white;
+}
+
+/* Animation */
+
+.parallax>use {
+    animation: move-forever 25s cubic-bezier(.55, .5, .45, .5) infinite;
+}
+
+.parallax>use:nth-child(1) {
+    animation-delay: -2s;
+    animation-duration: 7s;
+}
+
+.parallax>use:nth-child(2) {
+    animation-delay: -3s;
+    animation-duration: 10s;
+}
+
+.parallax>use:nth-child(3) {
+    animation-delay: -4s;
+    animation-duration: 13s;
+}
+
+.parallax>use:nth-child(4) {
+    animation-delay: -5s;
+    animation-duration: 20s;
+}
+
+@keyframes move-forever {
+    0% {
+        transform: translate3d(-90px, 0, 0);
+    }
+
+    100% {
+        transform: translate3d(85px, 0, 0);
+    }
+}
+
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+    .waves {
+        height: 40px;
+        min-height: 40px;
+    }
+
+    .content {
+        height: 30vh;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}

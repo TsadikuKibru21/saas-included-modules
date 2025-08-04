@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<odoo>
+    <data>
+        <record id="ssh_key_store_path" model="ir.config_parameter">
+            <field name="key">se_server_management.ssh_key_store_path</field>
+            <field name="value">/opt/odoo17/server_mangt_odoo/</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-model href="res_users_views.xsd"?>
+<odoo>
+
+    <record id="view_users_form_inhert_id" model="ir.ui.view">
+        <field name="name">res.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='preferences']" position="after">
+                <page name="point_of_sale" string="Point Of Sale">
+                    <group>
+                        <group string="Point Of Sale">
+                            <field name="pos_login_direct" />
+                            <field name="pos_logout_direct" />
+                            <field name="pos_config_id"
+                                invisible="pos_login_direct == False"
+                                required="pos_login_direct == True" />
+                            <field name="pos_pin" widget="password" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

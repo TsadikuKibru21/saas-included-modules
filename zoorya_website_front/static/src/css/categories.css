@@ -1,0 +1,41 @@
+.category-selector {
+    text-align: center;
+    margin: 50px 0;
+}
+
+.category-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.category-btn {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.2);
+}
+
+.category-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.category-btn:focus {
+    outline: none;
+}
+
+.category-btn.active {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+.category-btn:active {
+    transform: scale(0.98);
+}

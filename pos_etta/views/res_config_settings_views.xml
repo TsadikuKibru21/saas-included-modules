@@ -1,0 +1,406 @@
+<odoo>
+    <data>
+        <record id="res_config_settings_view_form" model="ir.ui.view">
+            <field name="name">pos.config.settings.view.form.inherit.pos.etta</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//block[@id='pos_payment_section']" position="inside">
+                    <setting string="Customize Fiscal Receipt"
+                        help="Add an image to fiscal receipt.">
+                        <field name="receipt_image_name" invisible="1" />
+                        <field name="receipt_image" class="w-100" filename="receipt_image_name" />
+                    </setting>
+                    <setting string="Waiter and Table on Fiscal Receipt">
+                        <field name="show_waiter_table_on_fiscal_receipt" />
+                    </setting>
+                    <setting help="Automatic Invoice Order">
+                        <field name="order_auto_invoice" />
+                    </setting>
+                    <setting help="Z Report on Closing">
+                        <field name="z_on_closing" />
+                    </setting>
+                </xpath>
+                <xpath expr="//block[@id='pos_pricing_section']" position="before">
+                    <block title="Fiscal Function Access Control" id="pos_custom_access_settings">
+                        <setting string="Quantity Change Settings"
+                            help="Set access level and PIN lock for Quantity Change Settings">
+                            <div class="row mt16">
+                                <label string="Access Level"
+                                    for="allow_quantity_change_and_remove_orderline"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="allow_quantity_change_and_remove_orderline"
+                                    class="col-lg-9" />
+                            </div>
+                            <div class="row mt16">
+                                <label string="Enable PIN Locking"
+                                    for="allow_quantity_change_and_remove_orderline_pin_lock_enabled"
+                                    class="col-lg-3 o_light_label" />
+                                <field
+                                    name="allow_quantity_change_and_remove_orderline_pin_lock_enabled"
+                                    class="col-lg-9" />
+                            </div>
+                            <div class="row mt16"
+                                invisible="not allow_quantity_change_and_remove_orderline_pin_lock_enabled">
+                                <label string="PIN Code"
+                                    for="allow_quantity_change_and_remove_orderline_pin_code"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="allow_quantity_change_and_remove_orderline_pin_code"
+                                    widget="password" class="col-lg-9" />
+                            </div>
+                        </setting>
+                        <setting string="Remove Orderline Settings"
+                            help="Set access level and PIN lock for Remove Orderline Settings">
+                            <div class="row mt16">
+                                <label string="Access Level" for="allow_remove_orderline"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="allow_remove_orderline" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16">
+                                <label string="Enable PIN Locking"
+                                    for="allow_remove_orderline_pin_lock_enabled"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="allow_remove_orderline_pin_lock_enabled"
+                                    class="col-lg-9" />
+                            </div>
+                            <div class="row mt16"
+                                invisible="not allow_remove_orderline_pin_lock_enabled">
+                                <label string="PIN Code" for="allow_remove_orderline_pin_code"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="allow_remove_orderline_pin_code" widget="password"
+                                    class="col-lg-9" />
+                            </div>
+                        </setting>
+                        <setting string="Price Change Settings"
+                            help="Set access level and PIN lock for Price Change">
+                            <div class="row mt16">
+                                <label string="Access Level" for="allow_price_change"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="allow_price_change" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16">
+                                <label string="Enable PIN Locking"
+                                    for="price_change_pin_lock_enabled"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="price_change_pin_lock_enabled" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16" invisible="not price_change_pin_lock_enabled">
+                                <label string="PIN Code" for="price_change_pin_code"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="price_change_pin_code" widget="password"
+                                    class="col-lg-9" />
+                            </div>
+                        </setting>
+                        <setting string="Z Report Settings"
+                            help="Set access level and PIN lock for Z Report">
+                            <div class="row mt16">
+                                <label string="Access Level" for="z_report_access_level"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="z_report_access_level" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16">
+                                <label string="Enable PIN Locking" for="z_report_pin_lock_enabled"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="z_report_pin_lock_enabled" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16" invisible="not z_report_pin_lock_enabled">
+                                <label string="PIN Code" for="z_report_pin_code"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="z_report_pin_code" widget="password" class="col-lg-9" />
+                            </div>
+                        </setting>
+                        <setting string="X Report Settings"
+                            help="Set access level and PIN lock for X Report">
+                            <div class="row mt16">
+                                <label string="Access Level" for="x_report_access_level"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="x_report_access_level" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16">
+                                <label string="Enable PIN Locking" for="x_report_pin_lock_enabled"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="x_report_pin_lock_enabled" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16" invisible="not x_report_pin_lock_enabled">
+                                <label string="PIN Code" for="x_report_pin_code"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="x_report_pin_code" widget="password" class="col-lg-9" />
+                            </div>
+                        </setting>
+                        <setting string="FR PIN Settings"
+                            help="Set access level and PIN lock for FR PIN">
+                            <div class="row mt16">
+                                <label string="Access Level" for="fr_pin_access_level"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="fr_pin_access_level" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16">
+                                <label string="Enable PIN Locking" for="fr_pin_lock_enabled"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="fr_pin_lock_enabled" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16" invisible="not fr_pin_lock_enabled">
+                                <label string="PIN Code" for="fr_pin_code"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="fr_pin_code" widget="password" class="col-lg-9" />
+                            </div>
+                        </setting>
+                        <setting string="EJ Read Settings"
+                            help="Set access level and PIN lock for EJ Read">
+                            <div class="row mt16">
+                                <label string="Access Level" for="ej_read_access_level"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="ej_read_access_level" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16">
+                                <label string="Enable PIN Locking" for="ej_read_pin_lock_enabled"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="ej_read_pin_lock_enabled" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16" invisible="not ej_read_pin_lock_enabled">
+                                <label string="PIN Code" for="ej_read_pin_code"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="ej_read_pin_code" widget="password" class="col-lg-9" />
+                            </div>
+                        </setting>
+                        <setting string="EJ Copy Settings"
+                            help="Set access level and PIN lock for EJ Copy">
+                            <div class="row mt16">
+                                <label string="Access Level" for="ej_copy_access_level"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="ej_copy_access_level" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16">
+                                <label string="Enable PIN Locking" for="ej_copy_pin_lock_enabled"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="ej_copy_pin_lock_enabled" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16" invisible="not ej_copy_pin_lock_enabled">
+                                <label string="PIN Code" for="ej_copy_pin_code"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="ej_copy_pin_code" widget="password" class="col-lg-9" />
+                            </div>
+                        </setting>
+                        <setting string="All PLU Settings"
+                            help="Set access level and PIN lock for All PLU">
+                            <div class="row mt16">
+                                <label string="Access Level" for="all_plu_access_level"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="all_plu_access_level" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16">
+                                <label string="Enable PIN Locking" for="all_plu_pin_lock_enabled"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="all_plu_pin_lock_enabled" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16" invisible="not all_plu_pin_lock_enabled">
+                                <label string="PIN Code" for="all_plu_pin_code"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="all_plu_pin_code" widget="password" class="col-lg-9" />
+                            </div>
+                        </setting>
+                        <setting string="All Tax Settings"
+                            help="Set access level and PIN lock for All Tax">
+                            <div class="row mt16">
+                                <label string="Access Level" for="all_tax_access_level"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="all_tax_access_level" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16">
+                                <label string="Enable PIN Locking" for="all_tax_pin_lock_enabled"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="all_tax_pin_lock_enabled" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16" invisible="not all_tax_pin_lock_enabled">
+                                <label string="PIN Code" for="all_tax_pin_code"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="all_tax_pin_code" widget="password" class="col-lg-9" />
+                            </div>
+                        </setting>
+                        <setting string="Sync FP PIN Settings"
+                            help="Set access level and PIN lock for Sync FP PIN">
+                            <div class="row mt16">
+                                <label string="Access Level" for="sync_fp_pin_access_level"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="sync_fp_pin_access_level" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16">
+                                <label string="Enable PIN Locking" for="sync_fp_pin_lock_enabled"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="sync_fp_pin_lock_enabled" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16" invisible="not sync_fp_pin_lock_enabled">
+                                <label string="PIN Code" for="sync_fp_pin_code"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="sync_fp_pin_code" widget="password" class="col-lg-9" />
+                            </div>
+                        </setting>
+                        <setting string="GPRS Upload Settings"
+                            help="Set access level and PIN lock for GPRS Upload">
+                            <div class="row mt16">
+                                <label string="Access Level" for="gprs_upload_access_level"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="gprs_upload_access_level" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16">
+                                <label string="Enable PIN Locking"
+                                    for="gprs_upload_pin_lock_enabled"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="gprs_upload_pin_lock_enabled" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16" invisible="not gprs_upload_pin_lock_enabled">
+                                <label string="PIN Code" for="gprs_upload_pin_code"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="gprs_upload_pin_code" widget="password"
+                                    class="col-lg-9" />
+                            </div>
+                        </setting>
+
+                        <setting string="Payment Settings"
+                            help="Set access level and PIN lock for accepting payment">
+                            <div class="row mt16">
+                                <label string="Access Level" for="payment_access_level"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="payment_access_level" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16">
+                                <label string="Enable PIN Locking" for="payment_pin_lock_enabled"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="payment_pin_lock_enabled" class="col-lg-9" />
+                            </div>
+                            <div class="row mt16" invisible="not payment_pin_lock_enabled">
+                                <label string="PIN Code" for="payment_pin_code"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="payment_pin_code" widget="password" class="col-lg-9" />
+                            </div>
+                        </setting>
+
+                        <setting string="Customer Discount Settings"
+                            help="Set access level and PIN lock for setting customer discount">
+                            <div class="row mt16">
+                                <label string="Access Level" for="discount_access_level"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="discount_access_level" class="col-lg-9" />
+                            </div>
+                        </setting>
+
+                    </block>
+                </xpath>
+                <xpath expr="//block[@id='pos_pricing_section']" position="inside">
+                    <setting help="Adds a button to set a global service charge">
+                        <field name="pos_module_pos_service_charge" />
+                        <div class="content-group mt16"
+                            invisible="not pos_module_pos_service_charge">
+                            <div class="row">
+                                <label string="Service Charge %" for="global_service_charge"
+                                    class="col-lg-3 o_light_label" />
+                                <field name="global_service_charge"
+                                    field_id="global_service_charge_0" />
+                            </div>
+                        </div>
+                    </setting>
+                    <setting help="Fiscal Printer Serial Number">
+                        <field name="serial_number" />
+                    </setting>
+                    <setting help="Fiscal Printer MRC">
+                        <field name="fiscal_mrc" />
+                    </setting>
+                </xpath>
+                <xpath expr="//block[@id='pos_interface_section']" position="inside">
+                    <setting string="Default Customer" help="Set default customer">
+                        <div class="content-group mt16">
+                            <field name="pos_customer_id" colspan="4"
+                                options="{'no_open': True, 'no_create': True}" />
+                        </div>
+                    </setting>
+                    <block title="Stock Configuration in POS" id="stock_config">
+                        <setting help="Check this to display stock in pos screen">
+                            <field name="pos_display_stock" />
+                        </setting>
+                        <setting help="Stock type show up in POS screen.">
+                            <label for="pos_stock_type" string="Stock Type" />
+                            <div class="text-muted">
+                                Stock type show up in POS screen.
+                            </div>
+                            <field name="pos_stock_type" />
+                        </setting>
+                        <setting help="Allow pos order when product is out of stock.">
+                            <field name="pos_allow_order" />
+                        </setting>
+                        <setting
+                            help="Deny pos order when product quanity goes down to the entered quantity."
+                            invisible="not pos_allow_order">
+                            <field name="pos_deny_order" />
+                        </setting>
+                        <setting>
+                            <field name="stock_position" required="pos_display_stock" />
+                        </setting>
+                        <setting>
+                            <span class="o_form_label">Color Selection</span>
+                            <div class="w-50 row">
+                                <span class="d-block w-75 py-2">Background Color</span>
+                                <field name="color_background" class="d-block w-25 p-0 m-0"
+                                    widget="color" />
+                            </div>
+                            <div class="w-50 row mt-1">
+                                <span class="d-block w-75 py-2">Font Color</span>
+                                <field name="font_background" class="d-block w-25 p-0 m-0"
+                                    widget="color" />
+                            </div>
+                        </setting>
+                        <setting>
+                            <field name="low_stock" />
+                        </setting>
+                    </block>
+                    <block title="Stock Location Configuration" id="stock_location_config">
+                        <setting id="stock_location">
+                            <label for="show_stock_location" />
+                            <div class="text-muted">
+                                Product stock location type
+                            </div>
+                            <field name="show_stock_location" class="o_light_label" widget="radio" />
+                        </setting>
+                        <setting id="stock_location_inventory">
+                            <label for="stock_location_id" />
+                            <div class="text-muted">
+                                Stock location used for inventory
+                            </div>
+                            <field name="stock_location_id" required="pos_display_stock" />
+                        </setting>
+                    </block>
+                    <block title="Manufacture from POS" id="manufacture_pos_config">
+                        <setting id="manufacture_pos_create">
+                            <label for="create_mrp_order" />
+                            <div class="text-muted">
+                                POS Create MRP Order
+                            </div>
+                            <field name="create_mrp_order" />
+                        </setting>
+                        <setting id="manufacture_pos_done">
+                            <label for="is_done" />
+                            <div class="text-muted">
+                                Done MRP Order
+                            </div>
+                            <field name="is_done" />
+                        </setting>
+                    </block>
+                </xpath>
+                <xpath expr="//field[@name='pos_is_order_printer']" position="after">
+                    <field name="order_printing_type" />
+                </xpath>
+            </field>
+        </record>
+        <record id="product_stock_quant" model="ir.ui.view">
+            <field name="name">product.product.stock.quant.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='pos_categ_ids']" position="after">
+                    <field name="stock_quant_ids" readonly="1" invisible="1" />
+                    <field name="quant_text" invisible="1" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+
+</odoo>

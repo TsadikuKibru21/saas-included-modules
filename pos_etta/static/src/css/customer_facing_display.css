@@ -1,0 +1,47 @@
+@font-face {
+    font-family: 'Digital-7';
+    src: url('/pos_etta/static/font/digital-7.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body .pos-customer_facing_display .pos-payment_info .pos-payment_info_details .pos-paymentlines::after {
+    height: 0vw;
+    content: '';
+    display: block;
+    width: 100%;
+}
+
+body .pos-customer_facing_display .pos-payment_info .pos-payment_info_details .pos-total {
+    font-family: 'Digital-7', sans-serif;
+    font-size: min(max(5vw, 1.5rem), 3rem);  /* Increase font size */
+    font-weight: bold;
+    color: lime;
+}
+
+body .pos-customer_facing_display .pos-payment_info .pos-payment_info_details {
+    background-color: transparent;
+    padding: 50px 5px;
+    flex-grow: 0;
+    overflow: hidden;
+}
+
+body .pos-customer_facing_display .pos-payment_info .pos-payment_info_details .pos-paymentlines {
+    font-family: 'Digital-7', sans-serif;
+    font-size: 60px;
+    color: lime;
+}
+
+body .pos-customer_facing_display .pos-payment_info .pos-payment_info_details .pos-paymentlines .name {
+    font-size: 30px;
+}
+
+.pos-palette_01 .pos-payment_info {
+    background-image: linear-gradient(to bottom, black 0%, white 70%);
+    height: 100vh;
+    margin: 0;
+}
+
+.pos-customer_facing_display .pos_orderlines_list table td {
+    font-size: max(min(5vh, 3vw), 1rem);
+}

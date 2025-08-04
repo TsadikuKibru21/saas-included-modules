@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="point_of_sale.DeliveryOrderLine">
+        <tr class="order-line" t-att-data-id="props.order.zmall_order_id">
+            <!-- Customer -->
+            <td class="align-middle" style="width: 25%">
+                <div>
+                    <div class="fw-bold"><t t-esc="props.order.customer_name or ''" /></div>
+                    <small class="text-muted"><t t-esc="props.order.created_at or ''" /></small>
+                </div>
+            </td>
+
+            <!-- Total -->
+            <td class="align-middle" style="width: 15%">
+                <span class="badge bg-light text-dark" t-if="props.order.total_cart_price">
+                    <t t-esc="props.order.total_cart_price" />
+                </span>
+            </td>
+
+            <!-- Items with Quantity -->
+            <td class="align-middle" style="width: 25%">
+                <t t-if="props.order and props.order.cart_items and props.order.cart_items.length > 0">
+                    <div class="text-truncate">
+                        <t t-foreach="props.order.cart_items" t-as="item" t-key="item.unique_id">
+                            <div class="d-flex align-items-center mb-1">
+                                <span class="badge bg-primary me-2">
+                                    x<t t-esc="item.quantity"/>
+                                </span>
+                                <span class="text-truncate">
+                                    <t t-esc="item.full_product_name"/>
+                                </span>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </td>
+
+            <!-- Status -->
+            <td class="align-middle" style="width: 15%">
+                <t t-if="props.order.order_status == 1">
+                    <button t-on-click.stop="()=> this.handleOrderLineClick(props.order)" 
+                            class="btn btn-sm btn-primary w-100">
+                        <i class="fa fa-bell me-1"/>New
+                    </button>
+                </t>
+                <t t-elif="props.order.order_status == 3">
+                    <button t-on-click.stop="() => this.handleOrderLineClick(props.order)" 
+                            class="btn btn-sm btn-warning w-100">
+                        <i class="fa fa-check me-1"/>Accepted
+                    </button>
+                </t>
+                <t t-elif="props.order.order_status == 5">
+                    <button t-on-click.stop="()=> this.handleOrderLineClick(props.order)" 
+                            class="btn btn-sm btn-info w-100">
+                        <i class="fa fa-clock me-1"/>Prepared
+                    </button>
+                </t>
+                <t t-elif="props.order.order_status == 7">
+                    <button t-on-click.stop="()=> this.handleOrderLineClick(props.order)" 
+                            class="btn btn-sm btn-success w-100">
+                        <i class="fa fa-check-circle me-1"/>Ready
+                    </button>
+                </t>
+            </td>
+
+            <!-- Actions -->
+            <td class="align-middle text-end" style="width: 20%">
+                <div class="btn-group btn-group-sm">
+                    <button class="btn btn-danger" 
+                            t-on-click.stop="() => this.handleCancelOrderButton(props.order)">
+                        <i class="fa fa-times me-1"/>Cancel
+                    </button>
+                    <button class="btn btn-info" 
+                            t-on-click.stop="() => this.handleonClickCartButton(props.order)">
+                        <i class="fa fa-info-circle me-1"/>Details
+                    </button>
+                </div>
+            </td>
+        </tr>
+    </t>
+</templates>
+
+
+<!-- <?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+
+<t t-name="point_of_sale.DeliveryOrderLine">
+    <tr class="order-line" t-att-data-id="props.order.zmall_order_id">
+        
+        <td class="align-middle" style="width: 25%">
+            <div>
+                <div class="fw-bold"><t t-esc="props.order.customer_name or ''" /></div>
+                <small class="text-muted"><t t-esc="props.order.created_at or ''" /></small>
+            </div>
+        </td>
+
+      
+        <td class="align-middle" style="width: 15%">
+            <span class="badge bg-light text-dark" t-if="props.order.total_cart_price">
+                <t t-esc="props.order.total_cart_price" />
+            </span>
+        </td>
+
+       
+        <td class="align-middle" style="width: 25%">
+            <t t-if="props.order and props.order.cart_items and props.order.cart_items.length > 0">
+                <div class="text-truncate">
+                    <t t-foreach="props.order.cart_items" t-as="item" t-key="item.unique_id">
+                        <small class="d-block text-muted">
+                            <t t-esc="item.full_product_name"/>
+                        </small>
+                    </t>
+                </div>
+            </t>
+        </td>
+
+        <td class="align-middle" style="width: 15%">
+            <t t-if="props.order.order_status == 1">
+                <button t-on-click.stop="()=> this.handleOrderLineClick(props.order)" 
+                        class="btn btn-sm btn-primary w-100">New</button>
+            </t>
+            <t t-elif="props.order.order_status == 3">
+                <button t-on-click.stop="() => this.handleOrderLineClick(props.order)" 
+                        class="btn btn-sm btn-warning w-100">Accepted</button>
+            </t>
+            <t t-elif="props.order.order_status == 5">
+                <button t-on-click.stop="()=> this.handleOrderLineClick(props.order)" 
+                        class="btn btn-sm btn-info w-100">Prepared</button>
+            </t>
+            <t t-elif="props.order.order_status == 7">
+                <button t-on-click.stop="()=> this.handleOrderLineClick(props.order)" 
+                        class="btn btn-sm btn-success w-100">Ready</button>
+            </t>
+        </td>
+
+  
+        <td class="align-middle text-end" style="width: 20%">
+            <div class="btn-group btn-group-sm">
+                <button class="btn btn-danger" 
+                        t-on-click.stop="() => this.handleCancelOrderButton(props.order)">
+                    Cancel
+                </button>
+                <button class="btn btn-info" 
+                        t-on-click.stop="() => this.handleonClickCartButton(props.order)">
+                    Details
+                </button>
+            </div>
+        </td>
+    </tr>
+</t> -->
+<!-- <t t-name="point_of_sale.DeliveryOrderLine">
+    <tr t-attf-class="order-line d-flex align-items-center p-2 border-bottom {{highlight}}" 
+        t-att-data-id="props.order.zmall_order_id"
+        t-on-click="() => this.props.onClickOrder(props.order)">
+        
+        <td class="flex-grow-1">
+            <div class="d-flex flex-column">
+                <b class="customer-name mb-1">
+                    <t t-esc="props.order.customer_name or ''" />
+                </b>
+                <small class="text-muted">
+                    <t t-esc="props.order.created_at or ''" />
+                </small>
+            </div>
+        </td>
+
+        <td class="text-end px-3" t-if="props.order.total_cart_price">
+            <span class="badge bg-light text-dark">
+                <t t-esc="props.order.total_cart_price" />
+            </span>
+        </td>
+
+        <td class="flex-grow-2 px-3">
+            <t t-if="props.order and props.order.cart_items and props.order.cart_items.length > 0">
+                <t t-if="props.order and Array.isArray(props.order.cart_items)" 
+                   t-foreach="props.order.cart_items" t-as="item" t-key="item.unique_id">
+                    <div class="d-flex align-items-center mb-1">
+                        <i class="fa fa-tag text-muted me-2"/>
+                        <span class="text-truncate"><t t-esc="item.full_product_name"/></span>
+                    </div>
+                </t>
+            </t>
+        </td>
+
+        <td class="px-2">
+            <t t-if="props.order and props.order.order_status == 1">
+                <button t-on-click.stop="()=> this.handleOrderLineClick(props.order)" 
+                        class="btn btn-sm btn-primary">New</button>
+            </t>
+            <t t-if="props.order and props.order.order_status == 3">
+                <button t-on-click.stop="() => this.handleOrderLineClick(props.order)" 
+                        class="btn btn-sm btn-warning">Accepted</button>
+            </t>
+            <t t-if="props.order and props.order.order_status == 5">
+                <button t-on-click.stop="()=> this.handleOrderLineClick(props.order)" 
+                        class="btn btn-sm btn-info">Prepared</button>
+            </t>
+            <t t-if="props.order and props.order.order_status == 7">
+                <button t-on-click.stop="()=> this.handleOrderLineClick(props.order)" 
+                        class="btn btn-sm btn-success">Ready</button>
+            </t>
+        </td>
+
+        <td class="px-2">
+            <div class="btn-group">
+                <button class="btn btn-sm btn-danger" 
+                        t-on-click.stop="() => this.handleCancelOrderButton(props.order)">
+                    <i class="fa fa-times me-1"/>Cancel
+                </button>
+                <button class="btn btn-sm btn-info" 
+                        t-on-click.stop="() => this.handleonClickCartButton(props.order)">
+                    <i class="fa fa-info-circle me-1"/>Details
+                </button>
+            </div>
+        </td>
+    </tr>
+</t> -->
+
+
+
+
+    <!-- <t t-name="point_of_sale.DeliveryOrderLine">
+            <tr t-attf-class="order-line gap-2 gap-lg-0 align-top {{highlight}}" t-att-data-id="props.order.zmall_order_id"
+            t-on-click="() => this.props.onClickOrder(props.order)">
+            <td>
+                <b>
+                    <t t-esc="props.order.customer_name or ''" />
+                </b>
+                <div class="company-field text-bg-muted">
+                    <t t-esc="props.order.created_at or ''" />
+                </div>
+            </td>
+            <td>
+                <div class="order-line-total-price" t-if="props.order.total_cart_price">
+                    <t t-esc="props.order.total_cart_price" />
+                </div>
+            </td>
+            <td class="order-line-items">
+                <t t-if="props.order and props.order.cart_items and props.order.cart_items.length >0 ">
+                    <t t-if="props.order and Array.isArray(props.order.cart_items)" t-foreach="props.order.cart_items" t-as="item" t-key="item.unique_id">
+                        <div>
+                            <i class="fa fa-fw fa-tag me-2"/><t t-esc="item.full_product_name"/>
+                        </div>
+                    </t>
+                </t>
+            </td>
+            <td style="edit-order-button-cell">
+                                            <t t-if="props.order and props.order.order_status == 1">
+                                                <button t-on-click="()=> this.handleOrderLineClick(props.order)" class="highlight edit-order-button btn btn-primary border">New</button>
+                                            </t>
+                                            <t t-if="props.order and props.order.order_status == 3">
+                                                <button  t-on-click="() => this.handleOrderLineClick(props.order)" class="highlight edit-order-button btn btn-warning border">Accepted</button>
+                                            </t>
+                                            <t t-if="props.order and props.order.order_status == 5">
+                                                <button  t-on-click=" ()=> this.handleOrderLineClick(props.order)" class="highlight edit-order-button btn btn-info border">Prepared</button>
+                                            </t>
+                                            <t t-if="props.order and props.order.order_status == 7">
+                                                <button  t-on-click="()=> this.handleOrderLineClick(props.order)" class="highlight edit-order-button btn btn-success border">Ready</button>
+                                            </t>
+
+                                        </td>
+             <td class="edit-order-button-cell">
+                <button class="edit-order-button btn btn-danger border" t-on-click.stop="() => this.handleCancelOrderButton(props.order)">Cancel</button>
+            </td>
+            <td class="edit-order-button-cell">
+                <button class="edit-order-button btn btn-info border" t-on-click.stop="() => this.handleonClickCartButton(props.order)">DETAILS</button>
+            </td>
+
+            
+            
+            <td class="order-line-last-column-placeholder oe_invisible"></td>
+        </tr>
+
+
+    </t> -->
+
+<!-- </templates> -->
+
+
+<!-- <td class="edit-order-button-cell">
+                <button class="edit-order-button btn btn-info border" t-on-click.stop="() => this.handleaddposorder(props.order)">add to pos order</button>
+            </td> -->

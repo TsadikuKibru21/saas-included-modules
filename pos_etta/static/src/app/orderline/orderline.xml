@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_etta.Orderline" t-inherit="point_of_sale.Orderline" t-inherit-mode="extension">
+        <xpath expr="//li[contains(@class, 'price-per-unit')]" position="after">
+            <li t-if="line.price !== 0 and line.service_charge and line.service_charge !== '0'">
+                With a <em><t t-esc="line.service_charge" />% </em> service charge
+            </li>
+        </xpath>
+        <xpath expr="//div[hasclass('product-name')]" position="before">
+            <div t-if="!line.order.state" class="d-inline-block me-2">
+                <!-- <button class="remove-orderline-btn btn btn-sm btn-danger" t-on-click="() => line.order.removeOrderline(line.orderline)">X</button> -->
+                <button t-on-click="() => line.order.removeOrderline(line.orderline)" style="width: 20px; height: 20px; border-radius: 50%; border: none; background-color: red; color: white; display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+        </xpath>
+    </t>
+
+</templates>

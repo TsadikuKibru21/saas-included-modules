@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_etta.DeliveryProductScreen">
+        <div class="product-screen screen h-100 d-flex flex-column bg-light">
+            <!-- Header -->
+            <header class="screen-header bg-white shadow-sm p-3">
+                <div class="d-flex justify-content-between align-items-center">
+                    <!-- Left side buttons -->
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-secondary btn-sm" t-on-click="backclick">
+                            <i class="fa fa-arrow-left me-1"/>Back
+                        </button>
+                        <button t-if="state.detailIsShown" 
+                                class="btn btn-primary btn-sm" 
+                                t-on-click="() => this.partnerEditor.save()">
+                            <i class="fa fa-save me-1"/>Save
+                        </button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Main Content -->
+            <div class="flex-grow-1 overflow-auto p-3">
+                <div class="card shadow-sm">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="bg-light">
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Details</th>
+                                    <th class="text-end">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-if="getProducts and getProducts.length >= 1">
+                                    <t t-foreach="getProducts" t-as="order" t-key="order.item_id">
+                                        <DeliveryProductLine 
+                                            order="order"
+                                            selectedOrder="state.selectedOrder"
+                                            onClickOrder.bind="clickOrder"
+                                            clickOrderLineEtta.bind="clickOrderLineEtta"
+                                        />
+                                    </t>
+                                </t>
+                                <tr t-if="!getProducts or getProducts.length === 0">
+                                    <td colspan="3" class="text-center py-4 text-muted">
+                                        <i class="fa fa-box fa-2x mb-2 d-block"/>
+                                        No products found
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

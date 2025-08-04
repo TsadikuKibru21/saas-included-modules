@@ -1,0 +1,14 @@
+<odoo>
+    <record id="view_product_category_form_inherit_saas" model="ir.ui.view">
+        <field name="name">product.category.form.inherit.saas</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group" position="inside">
+                <group>
+                    <field name="is_saas_category" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="pos_etta.FiscalReadingPopup">
+        <div class="popup fiscal-reading-popup">
+            <main class="modal-body">
+                <div class="fiscal-reading">
+                    <header class="popup-header">
+                        <h2>Fiscal Reading</h2>
+                    </header>
+                    <div class="date-range-selector">
+                        <div class="checkbox-input">
+                            <input type="checkbox" id="by-date-range" t-model="state.byDateRange" t-on-click="onDateRangeChange"/>
+                            <label for="by-date-range"> By Date Range</label>
+                        </div>
+                        <div class="checkbox-input">
+                            <input type="checkbox" id="summary" t-model="state.summary"/>
+                            <label for="summary">Detailed</label>
+                        </div>
+
+                        <div t-if="state.showDateFields" class="date-input">
+                          <label for="from-date"><i class="fa fa-calendar" aria-hidden="true"></i> From Date</label>
+                          <input type="date" id="from-date" t-model="state.fromDate"/>
+                        </div>
+                        <div t-if="state.showDateFields" class="date-input">
+                          <label for="to-date"><i class="fa fa-calendar" aria-hidden="true"></i> To Date</label>
+                          <input type="date" id="to-date" t-model="state.toDate"/>
+                        </div>
+                        <div t-if="state.showNumberFields" class="number-input">
+                          <label for="from-z-no">From Z No</label>
+                          <input type="number" id="from-z-no" t-model="state.fromZno" min="1"/>
+                        </div>
+                        <div t-if="state.showNumberFields" class="number-input">
+                          <label for="to-z-no">To Z No</label>
+                          <input type="number" id="to-z-no" t-model="state.toZno" min="1"/>
+                        </div>
+
+                    </div>
+                </div>
+            </main>
+            <footer class="footer fiscal-reading-footer modal-footer">
+                <button class="button close btn btn-lg btn-danger" t-on-click="cancel">
+                    Close
+                </button>
+                <button class="button print btn btn-lg btn-success" t-on-click="onPrintButtonClick">
+                    Print
+                </button>
+            </footer>
+        </div>
+    </t>
+</templates>

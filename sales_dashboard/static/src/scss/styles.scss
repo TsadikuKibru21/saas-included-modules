@@ -1,0 +1,69 @@
+.chart-controls {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.export-options {
+    display: flex;
+    justify-content: space-around;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.edit-popup {
+    position: absolute;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    transform: scale(1);
+}
+
+.edit-popup h3 {
+    margin-top: 0;
+    color: #333;
+}
+
+.edit-popup label {
+    display: block;
+    margin-top: 10px;
+    color: #555;
+}
+
+.edit-popup input,
+.edit-popup select {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.edit-popup button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.edit-popup button:hover {
+    background-color: #0056b3;
+}
+
+.edit-popup button.cancel {
+    background-color: #dc3545;
+}
+
+.edit-popup button.cancel:hover {
+    background-color: #c82333;
+}

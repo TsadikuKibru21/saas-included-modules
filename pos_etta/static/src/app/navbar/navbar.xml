@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_etta.Navbar" t-inherit="point_of_sale.Navbar" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('pos-branding')]/img" position="replace">
+            <img class="pos-logo h-75 ms-3 me-auto align-self-center" t-on-click="() => this.showInfoPopup()" src="/pos_etta/static/img/app_logo.png"/>
+        </xpath>
+        <xpath expr="//div[contains(@class, 'status-buttons')]" position="inside">
+            <div t-on-click="togglePosMode" class="oe_status btn btn-light rounded-0">
+                <div t-if="isRefund" class="js_connected oe_icon text-danger">
+                    <i class="fa fa-reply" role="img" aria-label="R Mode" title="R Mode"> R-MODE</i>
+                </div>
+                <div t-if="!isRefund" class="js_connected oe_icon text-success">
+                    <i class="fa fa-share" role="img" aria-label="S Mode" title="S Mode"> S-MODE</i>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//div[contains(@class, 'menu-button')]/ul/li/ul" position="inside">
+            <li class="menu-item navbar-button edit-button" t-if="pos.config.gprs_upload_access_level === 'both' or (pos.config.gprs_upload_access_level === 'basic' and pos.get_cashier().role !== 'manager') or (pos.config.gprs_upload_access_level === 'advanced' and pos.get_cashier().role === 'manager')" t-on-click="onGPRSUploadClicked">
+                <a class="dropdown-item py-2">GPRS Upload</a>
+            </li>
+            <li class="menu-item navbar-button edit-button" t-if="pos.config.sync_fp_pin_access_level === 'both' or (pos.config.sync_fp_pin_access_level === 'basic' and pos.get_cashier().role !== 'manager') or (pos.config.sync_fp_pin_access_level === 'advanced' and pos.get_cashier().role === 'manager')" t-on-click="onSyncFPClicked">
+                <a class="dropdown-item py-2">Sync FP</a>
+            </li>
+            <li class="menu-item navbar-button edit-button" t-if="pos.config.all_plu_access_level === 'both' or (pos.config.all_plu_access_level === 'basic' and pos.get_cashier().role !== 'manager') or (pos.config.all_plu_access_level === 'advanced' and pos.get_cashier().role === 'manager')" t-on-click="onPrintAllPlusClick">
+                <a class="dropdown-item py-2">Print All PLU's</a>
+            </li>
+            <li class="menu-item navbar-button edit-button" t-if="pos.config.all_tax_access_level === 'both' or (pos.config.all_tax_access_level === 'basic' and pos.get_cashier().role !== 'manager') or (pos.config.all_tax_access_level === 'advanced' and pos.get_cashier().role === 'manager')" t-on-click="onPrintAllTaxRates">
+                <a class="dropdown-item py-2">Print All Tax Rates</a>
+            </li>
+            <li class="menu-item navbar-button edit-button" t-if="pos.config.ej_read_access_level === 'both' or (pos.config.ej_read_access_level === 'basic' and pos.get_cashier().role !== 'manager') or (pos.config.ej_read_access_level === 'advanced' and pos.get_cashier().role === 'manager')" t-on-click="() => this.onEJReadClick()">
+                <a class="dropdown-item py-2">EJ Reading</a>
+            </li>
+            <li class="menu-item navbar-button edit-button" t-if="pos.config.fr_pin_access_level === 'both' or (pos.config.fr_pin_access_level === 'basic' and pos.get_cashier().role !== 'manager') or (pos.config.fr_pin_access_level === 'advanced' and pos.get_cashier().role === 'manager')" t-on-click="() => this.onFiscalReadingClick()">
+                <a class="dropdown-item py-2">Fiscal Reading</a>
+            </li>
+            <li class="menu-item navbar-button edit-button" t-if="pos.config.x_report_access_level === 'both' or (pos.config.x_report_access_level === 'basic' and pos.get_cashier().role !== 'manager') or (pos.config.x_report_access_level === 'advanced' and pos.get_cashier().role === 'manager')" t-on-click="onXReportClick">
+                <a class="dropdown-item py-2">Print X-Session</a>
+            </li>
+            <li class="menu-item navbar-button" t-if="pos.config.z_report_access_level === 'both' or (pos.config.z_report_access_level === 'basic' and pos.get_cashier().role !== 'manager') or (pos.config.z_report_access_level === 'advanced' and pos.get_cashier().role === 'manager')" t-on-click="onZReportClick">
+                <a class="dropdown-item py-2">Print Z-Report</a>
+            </li>
+            <li class="menu-item navbar-button" t-on-click="onLowStockClick">
+                <a class="dropdown-item py-2">Low Stock</a>
+            </li>
+        </xpath>
+
+        <!-- <xpath expr="//li[contains(@class, 'close-button')]" position="replace">
+            <li class="menu-item navbar-button edit-button" t-if="pos.config.z_report_access_level === 'both' or (pos.config.z_report_access_level === 'basic' and pos.get_cashier().role !== 'manager') or (pos.config.z_report_access_level === 'advanced' and pos.get_cashier().role === 'manager')" t-on-click="onCloseSessionClick">
+                <a class="dropdown-item py-2">Close Session</a>
+            </li>
+        </xpath> -->
+    </t>
+</templates>

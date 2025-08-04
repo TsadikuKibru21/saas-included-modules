@@ -1,0 +1,153 @@
+<odoo>
+  <template id="zoorya_home_page" name="Home">
+    <t t-call="website.layout">
+      <t t-set="title">Zoorya : Business Automation and BIoT</t>
+      <section class="custom-hero">
+        <div class="custom-hero-content">
+          <h1 class="custom-hero-title">Grow your<br />Business</h1>
+          <p class="custom-hero-subtitle">With Smart Cash Register Machines</p>
+          <a href="/shop" class="custom-hero-btn" style="z-index:300; text-decoration: none;">Get
+            Started</a>
+        </div>
+        <div class="custom-hero-image">
+          <img src="/zoorya_website_front/static/src/img/p3mix.png" alt="POS System" />
+        </div>
+        <div class="bubbles">
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+          <div class="bubble"></div>
+        </div>
+      </section>
+
+      <section class="key-features">
+        <h2>Key Features</h2>
+        <p class="subtitle">Here are some key features of Zoorya that can benefit businesses in
+          these industries</p>
+        <div class="features-grid">
+          <div class="feature-item">
+            <img src="/zoorya_website_front/static/src/img/home_icons/pos.svg"
+              alt="Point of Sale (POS) System" />
+            <p>Point of Sale (POS) System</p>
+          </div>
+          <div class="feature-item">
+            <img src="/zoorya_website_front/static/src/img/home_icons/inventory.svg"
+              alt="Inventory Management" />
+            <p>Inventory Management</p>
+          </div>
+          <div class="feature-item">
+            <img src="/zoorya_website_front/static/src/img/home_icons/crm.svg"
+              alt="Customer Relationship Management (CRM)" />
+            <p>Customer Relationship Management (CRM)</p>
+          </div>
+          <div class="feature-item">
+            <img src="/zoorya_website_front/static/src/img/home_icons/finance.svg"
+              alt="Financial Management" />
+            <p>Financial Management</p>
+          </div>
+          <div class="feature-item">
+            <img src="/zoorya_website_front/static/src/img/home_icons/report.svg"
+              alt="Reporting and Analytics" />
+            <p>Reporting and Analytics</p>
+          </div>
+          <div class="feature-item">
+            <img src="/zoorya_website_front/static/src/img/home_icons/hr.svg" alt="Staff Management" />
+            <p>Staff Management</p>
+          </div>
+          <div class="feature-item">
+            <img src="/zoorya_website_front/static/src/img/home_icons/ecommerce.svg"
+              alt="Online Presence and E-commerce" />
+            <p>Online Presence and E-commerce</p>
+          </div>
+          <div class="feature-item">
+            <img src="/zoorya_website_front/static/src/img/home_icons/multi_loc.svg"
+              alt="Multi-Location Management" />
+            <p>Multi-Location Management</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="clients-section">
+        <h2>Our Clients</h2>
+        <div class="clients-logos">
+          <div class="logox">
+            <img src="/zoorya_website_front/static/src/img/clients/flow.svg" alt="Client 1 Logo" />
+          </div>
+          <div class="logox">
+            <img src="/zoorya_website_front/static/src/img/clients/tagrow.svg" alt="Client 2 Logo" />
+          </div>
+          <div class="logox">
+            <img src="/zoorya_website_front/static/src/img/clients/ovid.svg" alt="Client 3 Logo" />
+          </div>
+          <div class="logox">
+            <img src="/zoorya_website_front/static/src/img/clients/savor.svg" alt="Client 4 Logo" />
+          </div>
+          <div class="logox">
+            <img src="/zoorya_website_front/static/src/img/clients/milkandhoney.svg"
+              alt="Client 5 Logo" />
+          </div>
+          <div class="logox">
+            <img src="/zoorya_website_front/static/src/img/clients/lewis.svg" alt="Client 6 Logo" />
+          </div>
+        </div>
+        <div>
+          <svg class="waves" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+            <defs>
+              <path id="gentle-wave"
+                d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+            </defs>
+            <g class="parallax">
+              <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+              <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+              <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+              <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+            </g>
+          </svg>
+        </div>
+      </section>
+
+      <section class="how-it-works">
+        <div class="left-content">
+          <h1>How it works</h1>
+          <p class="description">It's insanely easy to get started</p>
+          <p class="description">after selecting your product you can start right away to see the
+            magic happen</p>
+          <a href="/shop" class="custom-hero-btn" style="z-index:300; text-decoration: none;">Get
+            Started</a>
+        </div>
+        <div class="right-content">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-text">
+              <h3>Choose</h3>
+              <p>Choose your industry and product that fits you.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-text">
+              <h3>Fill forms</h3>
+              <p>Fill in essential information about your business</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-text">
+              <h3>Start</h3>
+              <p>Pay and start</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </t>
+  </template>
+</odoo>

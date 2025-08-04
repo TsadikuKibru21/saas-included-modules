@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- SEARCH VIEW -->
+        <record id="view_server_server_filter" model="ir.ui.view">
+            <field name="name">server.server.select</field>
+            <field name="model">server.server</field>
+            <field name="arch" type="xml">
+                <search string="server">
+                    <field name="name"/>
+                    <field name="ip_address"/>
+                    <field name="holder_id"/>
+                    <filter string="Not Inactive" name="not_inactive" domain="[('state', '!=', 'inactive')]"/>
+                    <group expand="0" string="Group By...">
+                        <filter string="Holder" context="{'group_by':'holder_id'}" name="holder_server"/>
+
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- FORMVIEW -->
+        <record id="view_server_server_form" model="ir.ui.view">
+            <field name="name">server.server.form</field>
+            <field name="model">server.server</field>
+            <field name="arch" type="xml">
+                <form string="server">
+                    <field name="id" invisible="1"/>
+                    <header>
+                        <button name="action_to_draft"
+                                type="object"
+                                domain="cancel,inactive"
+                                string="to Draft"
+                        />
+                        <button name="action_cancel"
+                                type="object"
+                                domain="draft,active"
+                                string="Cancel"
+                        />
+                        <button icon="fa-clock-o" type="object" name="generate_ssh_key" string="Generate/Upload SSH key"
+                                class="oe_inline oe_stat_button"/>
+
+                        <button name="connect_to_webssh" type="object" string="Connect to WebSSH" class="oe_inline oe_stat_button"
+                                help="Connect to WebSSH"/>
+                        <button icon="fa-clock-o" type="object" name="install_odoo" string="Install Odoo"
+                                class="oe_inline oe_stat_button"/>
+                        <button type="object" name="fetch_server_info" string="Fetch Server Info"
+                                class="oe_highlight"/>
+                        <field name="state" widget="statusbar"
+                               statusbar_colors='{}'
+                        />
+                    </header>
+                    <sheet string="server">
+                        <div class="oe_button_box" name="buttons">
+
+                            <button icon="fa-sun-o " type="object" string="Activate" class="oe_stat_button"
+                                    help="Obtiene la informacion del servidor (RAM, CPU, Disco, etc) y ejecuta los comandos de instalcion en el orden mostrado"
+                                    name="get_data_and_activate" domain="draft"/>
+                            <button icon="fa-sun-o " type="object" string="Start Service" class="oe_stat_button"
+                                    help="Obtiene la informacion del servidor (RAM, CPU, Disco, etc) y ejecuta los comandos de instalcion en el orden mostrado"
+                                    name="get_data_and_start" domain="draft"/>
+                            <button icon="fa-sun-o " type="object" string="Restart Service" class="oe_stat_button"
+                                    help="Obtiene la informacion del servidor (RAM, CPU, Disco, etc) y ejecuta los comandos de instalcion en el orden mostrado"
+                                    name="get_data_and_restart" confirm="Are You Sure?" domain="draft"/>
+                            <button icon="fa-sun-o " type="object" string="Stop Service" class="oe_stat_button"
+                                    help="Obtiene la informacion del servidor (RAM, CPU, Disco, etc) y ejecuta los comandos de instalcion en el orden mostrado"
+                                    name="get_data_and_stop" domain="draft" confirm="Are You Sure?"/>
+                            <button name="reboot_server" type="object" icon="fa-refresh" string="Reboot Server"
+                                    class="oe_stat_button" help="Reboot Server"
+                                    confirm="Are You Sure?" domain="draft,active"/>
+
+                        </div>
+                        <h1>
+                            <field name="name" placeholder="Name..." readonly="state!='draft'"/>
+                        </h1>
+                        <h2>
+                            <field name="main_hostname" widget="url" placeholder="IP Server..."
+                                   readonly="state!='draft'"/>
+                            <br/>
+
+                        </h2>
+                        <group>
+                            <group>
+                                <label for="ssh_port"/>
+                                <div>
+                                    <field
+                                            name="ssh_port"
+                                            class="oe_inline"/>
+                                    <button name="action_test_connection"
+                                            string="⇒ Test Connection"
+                                            type="object"
+                                            class="oe_link"/>
+                                </div>
+                                <field name="user_name" readonly="state!='draft'"/>
+                                <field name="is_remote" readonly="state!='draft'"/>
+                            </group>
+                            <group>
+                                <field name="server_use_type" readonly="state!='draft'"/>
+                                <field name="odoo_service_name"/>
+                                 <field name="file_moved_path"/>
+                                        <field name="file_upload" filename="file_name"/>
+                                        <button name="upload_file" string="Upload To Server" type="object" class="oe_highlight"/>
+                                   
+
+                                
+
+                                
+                                <field name="holder_id" readonly="state!='draft'"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Command" domain="active">
+                                <field name="command_ids">
+                                    <tree string="command">
+                                        <field name="sequence" widget="handle"/>
+                                        <field name="name"/>
+                                        <field name="command"/>
+                                        <button name="action_ejecutar" type="object" string="Execute"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="General Info" domain="active">
+                                <group>
+                                    <group>
+                                        <field name="http_port"/>
+                                        <field name="https_port"/>
+                                        <field name="host_name" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="ram_capacity" readonly="1"/>
+                                        <field name="ram_available" readonly="1"/>
+                                        <field name="ram_consumption" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="disk_capacity" readonly="1"/>
+                                        <field name="disk_available" readonly="1"/>
+                                        <field name="disk_consumption" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="cpu_number" readonly="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="Notes">
+                                <field name="note"/>
+                            </page>
+                            <page string="SSH Keys">
+                                <field name="ssh_password" password="True" string="SSH Key Passphrase"/>
+                                <field name="ssh_public_key" readonly="1"/>
+                            </page>
+                            <page string="Odoo Info">
+                                <field name="odoo_version_info">
+                                        <tree string="Installed Odoo Info">
+                                                <!-- <field name="name"/> -->
+                                                <field name="installed_path"/>
+                                                <field name="conf_path"/>
+                                                <field name="service_name"/>
+                                                <field name="master_passwd"/>
+                                                <field name="its_db"/>
+                                                
+                                        </tree>
+                                </field>
+                             
+                            </page>
+                        </notebook>
+                       <notebook>
+                        <page string="Logs">
+                            <field name="log" colspan="4" nolabel="1"
+                                   style=" width: 100%; height: 600px;  overflow-y: auto;color:rgb(255,255,255);  background: black;"
+                                   widget="html" readonly="1"/>
+                        </page>
+                    </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- TREEVIEW -->
+        <record id="view_server_server_tree" model="ir.ui.view">
+            <field name="name">server.server.tree</field>
+            <field name="model">server.server</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="sequence" widget="handle"/>
+                    <field name="name"/>
+                    <field name="ip_address"/>
+                    <field name="holder_id"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- KANBAN -->
+        <record model="ir.ui.view" id="view_server_kanban">
+            <field name="name">server.server.kanban</field>
+            <field name="model">server.server</field>
+            <field name="arch" type="xml">
+                <kanban class="oe_background_grey">
+                    <field name="name"/>
+                    <field name="main_hostname"/>
+                    <field name="holder_id"/>
+                    <field name="color"/>
+                    <field name="disk_consumption"/>
+                    <field name="ram_consumption_gib"/>
+                    <field name="ram_capacity_gib"/>
+                    <field name="cpu_number"/>
+                    <field name="cpu_load_percent"/>
+                    <field name="cpu_load_1"/>
+                    <field name="cpu_load_5"/>
+                    <field name="cpu_load_15"/>
+                    <field name="disk_available"/>
+                    <field name="disk_capacity"/>
+                    <field name="disk_consumption"/>
+                    <field name="disk_percentage"/>
+                    <field name="ram_available"/>
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div t-attf-class="oe_kanban_color_#{kanban_getcolor(record.color.raw_value)} oe_kanban_card">
+                                <!-- <div class="oe_kanban_content" style="width: 150px; height: 100px; margin: 0 auto;"> -->
+                                <div class="oe_kanban_content" style="width: 150px; margin: 0 auto;">
+                                    <h4 class="text-center">
+                                      <a type="open">
+                                            
+                                            <field name="name"/>
+                                        </a>
+                                         <br/>
+                                           <br/>
+                                            <br/>
+                                       
+                                            
+                                            <field name="main_hostname"/>
+                                    </h4>
+                                    <br/>
+                                    <a name="action_dummy" type="object">
+                                        Storage:
+                                    </a>
+                                    <br/>
+                                    <b>
+                                        <field name="disk_capacity"/>
+                                        Gib
+                                    </b>
+                                    <i style="font-size: 10px;">
+                                        (
+                                        <field name="disk_available"/>
+                                        Gib free)
+                                    </i>
+                                    <!-- <field name="disk_consumption" widget="progressbar" options="{'max_value':'disk_capacity'}"/> -->
+                                    <field name="disk_percentage" widget="progressbar"/>
+                                    <br/>
+                                    <a name="action_dummy" type="object">
+                                        RAM:
+                                    </a>
+                                    <br/>
+                                    <b>
+                                        <field name="ram_capacity_gib"/>
+                                        Gib
+                                    </b>
+                                    <i style="font-size: 10px;">
+                                        (
+                                        <field name="ram_available_gib"/>
+                                        Gib free)
+                                    </i>
+                                    <!-- <field name="ram_consumption_gib" widget="progressbar" options="{'max_value':'ram_capacity_gib'}"/> -->
+                                    <field name="ram_consumption_percent" widget="progressbar"/>
+                                    <br/>
+                                    <a name="action_dummy" type="object">
+                                        System Load:
+                                    </a>
+                                    <br/>
+                                    <b>
+                                        <field name="cpu_number"/>
+                                        CPU(s)
+                                    </b>
+                                    <br/>
+                                    <i style="font-size: 12px;">
+                                        Load Average 1|5|15 min
+                                        <br/>
+                                        <field name="cpu_load_1"/>
+                                        |
+                                        <field name="cpu_load_5"/>
+                                        |
+                                        <field name="cpu_load_15"/>
+                                    </i>
+                                    <br/>
+                                    <field name="cpu_load_percent" widget="progressbar"/>
+                                </div>
+                                <div class="oe_clear"/>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="action_server_server_servers" model="ir.actions.act_window">
+            <field name="name">Servers</field>
+            <field name="res_model">server.server</field>
+            <field name="view_mode">kanban,tree,form</field>
+            <field name="view_id" ref="view_server_kanban"/>
+            <field name="search_view_id" ref="view_server_server_filter"/>
+            <field name="domain">[]</field>
+            <field name="context">{'search_default_inactive': 1}</field>
+        </record>
+        <menuitem id="menu_servers" name="Servers" sequence="3"/>
+        <menuitem
+                name="Servers"
+                id="menu_servers_server"
+                sequence="1"
+                action="action_server_server_servers"
+                parent="menu_servers"/>
+    </data>
+</odoo>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <function model="ir.model.fields" name="formbuilder_whitetree">
+        <value>res.partner</value>
+        <value eval="[
+            'tin_number', 'specific_location', 'tin_certificate', 'business_license',
+            'business_registration', 'vat_certificate', 'national_id', 'delegation_letter'
+        ]"/>
+    </function>
+
+</odoo>

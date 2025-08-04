@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="void_reason_tree" model="ir.ui.view">
+        <field name="name">void.reason.tree</field>
+        <field name="model">void.reason</field>
+        <field name="arch" type="xml">
+            <tree string="Reasons" create="1" sample="1">
+                <field name="reason"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="voided_orders_form" model="ir.actions.act_window">
+        <field name="name">VoidedOrders</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">voided.orders</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No Voided Orders Found
+            </p>
+        </field>
+    </record>
+    <record id="voided_orders_tree" model="ir.ui.view">
+        <field name="name">voided.orders.tree</field>
+        <field name="model">voided.orders</field>
+        <field name="arch" type="xml">
+            <tree string="Voided Orders" create="0" sample="1">
+                <field name="reason_id"/>
+                <field name="order_id"/>
+                <field name="date"/>
+                <field name="cashier"/>
+                <field name="product"/>
+                <field name="unit_price"/>
+                <field name="quantity"/>
+                <field name="waiter_name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="void_reason_form" model="ir.actions.act_window">
+        <field name="name">Reason</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">void.reason</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No Reason found
+            </p>
+        </field>
+    </record>
+    <menuitem id="void_orders" name="Voided Orders" parent="point_of_sale.menu_point_rep" action="voided_orders_form" sequence="6"/>
+    <menuitem id="void_reason_ID" name="Voided Reason" parent="point_of_sale.menu_point_config_product" action="void_reason_form" sequence="10"/>
+
+</odoo>

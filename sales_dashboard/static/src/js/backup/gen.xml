@@ -1,0 +1,634 @@
+<templates xml:space="preserve">
+    <t t-name="chart_sample.chartjs_sample_hr_gen" owl="1">
+        <div class="big-card p-4 rounded-4 mt-4">
+            
+            <!-- 🏷️ Navbar Card (Smaller Height) -->
+            <div class="navbar-card d-flex flex-wrap flex-md-row flex-column justify-content-between align-items-center p-2 mb-3 shadow rounded-4 bg-white">
+                <div class="d-flex flex-column flex-md-row gap-2 w-100">
+                    <input type="text" class="form-control" placeholder="Search..." t-on-input="onSearchQueryChange"/>
+                    <!-- <button class="btn btn-primary" t-on-click="fetchData">🔄 Reset</button> -->
+                </div>
+            </div>  
+            <!-- 📊 Statistic Cards -->
+            <div class="d-flex flex-wrap flex-md-nowrap gap-3 mb-4">
+                <!-- <div id="jobsCard" class="stat-card yellow text-start p-3 rounded-5 shadow position-relative flex-fill" t-on-click="() => goToHRPage('jobs')">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="text-dark">Total Jobs</h6>
+                    </div>
+                    <div class="value-oval position-absolute bottom-0 start-0 ms-2 mb-2">
+                        <p class="fw-bold fs-6"><t t-esc="stats.totalJobs"/></p>
+                    </div>
+                    <span class="hr-icon position-absolute bottom-0 end-0 me-2 mb-2">💼</span>
+                </div> -->
+
+                <div id="jobsCard" class="stat-card red text-start p-3 rounded-5 shadow position-relative flex-fill" t-on-click="() => goToHRPage('jobs')">
+                    <div class="icon-box rounded-5 position-absolute top-0 end-1 mt-4">📈</div>
+                    <div class="stat-content">
+                        <p class="stat-value fw-bold fs-8 mb-2"><t t-esc="stats.totalOpportunities"/></p>
+                        <h6 class="stat-label text-dark">CRM Total Opportunities</h6>
+                    </div>
+                </div>
+           <div id="jobsCard" class="stat-card yellow text-start p-3 rounded-5 shadow position-relative flex-fill" t-on-click="() => goToHRPage('jobs')">
+                    <div class="icon-box rounded-5 position-absolute top-0 end-1 mt-4">📦</div>
+                    <div class="stat-content">
+                        <p class="stat-value fw-bold fs-8 mb-2"><t t-esc="stats.totalOrders"/></p>
+                        <h6 class="stat-label text-dark">Orders</h6>
+                    </div>
+                </div>
+                       <div id="jobsCard" class="stat-card green text-start p-3 rounded-5 shadow position-relative flex-fill" t-on-click="() => goToHRPage('jobs')">
+                    <div class="icon-box rounded-5 position-absolute top-0 end-1 mt-4">💰</div>
+                    <div class="stat-content">
+                        <p class="stat-value fw-bold fs-8 mb-2"><t t-esc="stats.totalRevenue"/></p>
+                        <h6 class="stat-label text-dark">Revenue</h6>
+                    </div>
+                </div>
+                <div id="employeesCard" class="stat-card blue text-start p-3 rounded-5 shadow position-relative flex-fill" t-on-click="() => goToHRPage('employees')">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="text-dark">Total Leaves</h6>
+                    </div>
+                    <div class="value-oval position-absolute bottom-0 start-0 ms-2 mb-2">
+                        <p class="fw-bold fs-8 "><t t-esc="stats.totalLeaves"/></p>
+                    </div>
+                    <span class="hr-icon position-absolute bottom-0 end-0 me-2 mb-2">👥</span>
+                </div>
+                   <div id="jobsCard" class="stat-card orange text-start p-3 rounded-5 shadow position-relative flex-fill" t-on-click="() => goToHRPage('jobs')">
+                    <div class="icon-box rounded-5 position-absolute top-0 end-1 mt-4">💰</div>
+                    <div class="stat-content">
+                        <p class="stat-value fw-bold fs-8 mb-2"><t t-esc="stats.totalStockValue"/></p>
+                        <h6 class="stat-label text-dark">Total Stock</h6>
+                    </div>
+                </div>
+                    <div id="jobsCard" class="stat-card burgendi text-start p-3 rounded-5 shadow position-relative flex-fill" t-on-click="() => goToHRPage('jobs')">
+                    <div class="icon-box rounded-5 position-absolute top-0 end-1 mt-4">📊</div>
+                    <div class="stat-content">
+                        <p class="stat-value fw-bold fs-8 mb-2"><t t-esc="stats.qout"/></p>
+                        <h6 class="stat-label text-dark">Quotations</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-row justify-content-between flex-wrap mt-4">
+            
+           
+            <div class="table-container mt-4">
+    <!-- Top Quotations Table -->
+    <h4 class="mb-3">📜 Top Quotations</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Quotation</th>
+                <th>Revenue ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+        <t t-log="'here wego',stats"/>
+        <t t-if="stats.topQuotations">
+            <t  t-foreach="stats.topQuotations" t-as="quotation" t-key="quotation.quotation">
+                <tr>
+                    <td><t t-esc="quotation.quotation"/></td>
+                    <td><t t-esc="quotation.revenue"/></td>
+                </tr>
+            </t>
+            </t>
+        </tbody>
+    </table>
+</div>
+
+<div class="table-container mt-4">
+    <!-- Top Products Table -->
+    <h4 class="mb-3">📦 Top Products</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Total Sales ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+        <t t-if="stats.topProducts">
+            <t t-foreach="stats.topProducts.labels" t-as="product" t-foreach-index="index" t-key="index">
+                <tr>
+                    <td><t t-esc="product"/></td>
+                    <td><t t-esc="stats.topProducts.data[index]"/></td>
+                </tr>
+            </t>
+            </t>
+        </tbody>
+    </table>
+</div><div class="table-container mt-4">
+    <h4 class="mb-3">🏅 Top Vendors</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Vendor</th>
+                <!-- <th>Total Spent ($)</th> -->
+            </tr>
+        </thead>
+        <tbody>
+        <t t-if="stats.topVendors and stats.topVendors.labels and stats.topVendors.data">
+            <t t-foreach="stats.topVendors.labels" t-as="vendor" t-foreach-index="index" t-key="index">
+                <tr>
+                    <td><t t-esc="vendor"/></td>
+                    <!-- <td><t t-esc="stats.topVendors.data[index]"/></td>  Now values should appear -->
+                </tr>
+            </t>
+        </t>
+        </tbody>
+    </table>
+</div>
+
+
+
+<div class="table-container mt-4">
+    <!-- Top Customers Table -->
+    <h4 class="mb-3">🏆 Top Customers</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Total Sales ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+        <t t-if="stats.topCustomers and stats.topCustomers.labels and stats.topCustomers.data">
+            <t t-foreach="stats.topCustomers.labels" t-as="customer" t-foreach-index="index" t-key="index">
+                <tr>
+                    <td><t t-esc="customer"/></td>
+                    <td><t t-esc="stats.topCustomers.data[index]"/></td> <!-- ✅ Fix: Display sales correctly -->
+                </tr>
+            </t>
+        </t>
+        </tbody>
+    </table>
+</div>
+
+ </div>
+
+
+<div class = "d-flex flex-row justify-content-between flex-wrap mt-4">
+<!-- Top RFQs Table -->
+<div class="table-container mt-4">
+    <h4 class="mb-3">📄 Top RFQs</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>RFQ</th>
+                <th>Amount ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+<t t-if="stats.topRFQs">
+    <t t-foreach="stats.topRFQs" t-as="rfq" t-key="rfq.rfq">
+        <tr>
+            <td><t t-esc="rfq.rfq"/></td>
+            <td><t t-esc="rfq.revenue"/></td>
+        </tr>
+    </t>
+</t>
+
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Top Orders Table -->
+<div class="table-container mt-4">
+    <h4 class="mb-3">📄 Top Invoices</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+             <th>Invoice</th>
+                <th>Amount ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+     <t t-if="stats.topInvoices">
+            <t t-foreach="stats.topInvoices" t-as="invoice" t-key="invoice.invoice">
+                <tr>
+                    <td><t t-esc="invoice.invoice"/></td>
+                    <td><t t-esc="invoice.revenue"/></td>
+                </tr>
+            </t>
+        </t>
+        </tbody>
+    </table>
+</div>
+
+<!-- Top Vendors Table -->
+<div class="table-container mt-4">
+    <h4 class="mb-3">🏅 Top Vendors</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Vendor</th>
+                <th>Total Spent ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+        <t t-if="stats.topVendors and stats.topVendors.labels and stats.topVendors.data">
+            <t t-foreach="stats.topVendors.labels" t-as="vendor" t-foreach-index="index" t-key="index">
+                <tr>
+                    <td><t t-esc="vendor"/></td>
+                    <td><t t-esc="stats.topVendors.data[index]"/></td>  <!-- Now values should appear -->
+                </tr>
+            </t>
+        </t>
+        </tbody>
+    </table>
+</div>
+<div class="table-container mt-4">
+    <h4 class="mb-3">🏭 Top Manufactured Products</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Manufactured Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+        <t t-if="stats.topManufacturedProducts and stats.topManufacturedProducts.labels and stats.topManufacturedProducts.data">
+            <t t-foreach="stats.topManufacturedProducts.labels" t-as="product" t-foreach-index="index" t-key="index">
+                <tr>
+                    <td><t t-esc="product"/></td>
+                    <td><t t-esc="stats.topManufacturedProducts.data[index]"/></td>
+                </tr>
+            </t>
+        </t>
+        </tbody>
+    </table>
+</div>
+</div>
+<div>
+<div class="table-container mt-4">
+    <h4 class="mb-3">🛠️ Top Work Centers</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Work Center</th>
+                <th>Usage Hours</th>
+            </tr>
+        </thead>
+        <tbody>
+        <t t-if="stats.topWorkCenters and stats.topWorkCenters.labels and stats.topWorkCenters.data">
+            <t t-foreach="stats.topWorkCenters.labels" t-as="workcenter" t-foreach-index="index" t-key="index">
+                <tr>
+                    <td><t t-esc="workcenter"/></td>
+                    <td><t t-esc="stats.topWorkCenters.data[index]"/></td>
+                </tr>
+            </t>
+        </t>
+        </tbody>
+    </table>
+</div>
+
+
+
+</div>
+
+
+            <!-- 📈 Graphs Section -->
+            <div class="d-flex flex-column flex-md-row gap-3 overflow-x-auto px-2">
+                <div class="chart-container flex-fill border rounded-4 p-3 bg-white shadow" style="width: 50%; height: 300px;">
+                <h4> Running Vs Expired </h4>
+                    <canvas t-ref="canvas"></canvas>
+                </div>
+                <div class="chart-container flex-fill border rounded-4 p-3 bg-white shadow" style="width: 50%; height: 300px;">
+                 <h4> Contract Experiation date </h4>
+                    <canvas t-ref="canvastwo"></canvas>
+                </div>
+            </div>
+            <div class="d-flex flex-column flex-md-row gap-3 overflow-x-auto px-2 mt-3">
+                <div class="chart-container flex-fill border rounded-4 p-3 bg-white shadow" style="width: 50%; height: 300px;">
+                 <h4> Absent Rate vs Present Rate </h4>
+                    <canvas t-ref="canvasDoughnut"></canvas>
+                </div>
+                <div class="chart-container flex-fill border rounded-4 p-3 bg-white shadow" style="width: 50%; height: 300px;">
+                 <h4> Pending Leaves </h4>
+                    <canvas t-ref="canvasLeave"></canvas>
+                </div>
+            </div>
+            
+
+<!-- <div class="table-container mt-4">
+  
+    <h4 class="mb-3">📜 Top Quotations</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Quotation</th>
+                <th>Revenue ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <t t-foreach="stats.topQuotations" t-as="quotation" t-key="quotation.quotation">
+                <tr>
+                    <td><t t-esc="quotation.quotation"/></td>
+                    <td><t t-esc="quotation.revenue"/></td>
+                </tr>
+            </t>
+        </tbody>
+    </table>
+</div> -->
+
+<!-- <div class="table-container mt-4">
+
+    <h4 class="mb-3">📦 Top Products</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Total Sales ($)</th>
+            </tr>
+        </thead>
+<tbody>
+    <t t-if="stats.topProducts">
+        <t t-foreach="stats.topProducts.labels" t-as="product" t-foreach-index="index" t-key="index">
+            <tr>
+                <td><t t-esc="product"/></td>
+                <td>$<t t-esc="stats.topProducts.data[index]"/></td>
+            </tr>
+        </t>
+    </t>
+    <t t-else>
+        <tr>
+            <td colspan="2">Loading...</td>
+        </tr>
+    </t>
+</tbody>
+
+
+
+    </table>
+</div> -->
+
+<!-- <div class="table-container mt-4">
+   
+    <h4 class="mb-3">🏆 Top Customers</h4>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Total Sales ($)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <t t-foreach="stats.topCustomers.labels" t-as="customer" t-foreach-index="index" t-key="index">
+                <tr>
+                    <td><t t-esc="customer"/></td>
+                    <td><t t-esc="stats.topCustomers.data[index]"/></td>
+                </tr>
+            </t>
+        </tbody>
+    </table>
+</div> -->
+
+
+
+
+
+
+        </div>
+
+        <!-- 📋 Top Quotations Table -->
+            <!-- <div class="table-responsive mt-4">
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Quotation</th>
+                            <th>Customer</th>
+                            <th>Total Amount</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="topQuotations.value" t-as="quotation" t-key="quotation.id">
+
+
+                            <tr>
+                                <td><t t-esc="quotation.name"/></td>
+                                <td><t t-esc="quotation.partner_id[1]"/></td>
+                                <td><t t-esc="quotation.amount_total"/></td>
+                                <td><t t-esc="quotation.date_order"/></td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div> -->
+        <!-- </div> -->
+
+        <style>
+
+        
+            .table-responsive {
+                overflow-x: auto;
+            }
+
+            .table {
+                width: 100%;
+                margin-bottom: 1rem;
+                color: #212529;
+            }
+
+            .table-bordered {
+                border: 1px solid #dee2e6;
+            }
+
+            .table-striped tbody tr:nth-of-type(odd) {
+                background-color: rgba(0, 0, 0, 0.05);
+            }
+
+            .thead-dark th {
+                color: #fff;
+                background-color: #343a40;
+                border-color: #454d55;
+            }
+
+        /* 📊 Stat Cards */
+.stat-card {
+    flex: 1;
+    border-radius: 6px;
+    position: relative;
+    height: 170px; /* Adjusted height to be greater than width */
+}
+.blue { background: #daeaf6; color: black;} 
+.red { background: #ffe2e5; color: black; } 
+.yellow { background: #fff4de; color: black; } 
+.green { background: #dcfce7; color: black; } 
+.orange { background: #ffe5b4; color: black; } 
+
+
+.icon-box1 { 
+    width: 70px; 
+    height: 70px; 
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px; /* Square corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px; /* Larger icon */
+    font-weight: bold;
+    position: absolute;
+    bottom: 0;
+    right: 0; /* Ensure it's at the bottom-right corner */
+    padding: 0;
+    margin: 0;
+}
+
+/* Stat Content */
+.stat-content {
+    margin-top: 55px; /* Adjust to push the content below the icon */
+    text-align: left; /* Changed from right to left */
+    padding-left: 10px; /* Changed from right to left */
+}
+
+.stat-value {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 60px;
+}
+
+.stat-label {
+    font-size: 16px;
+    color: #444;
+}
+
+                    .stat-card {
+                height: 170px;
+                position: relative;
+                padding: 20px;
+            }
+            .icon-box {
+                width: 40px;
+                height: 40px;
+                background: rgba(255, 255, 255, 0.8);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 20px;
+                font-weight: bold;
+            }
+            <!-- .stat-value {
+                font-size: 26px;
+                font-weight: bold;
+                margin-top: 10px;
+            } -->
+            .stat-label {
+                font-size: 16px;
+                color: #444;
+            }
+            /* 🟡 Big Yellow Card */
+            .big-card {
+                background: #f5f8fb;
+                padding: 20px;
+                border-radius: 6px;
+                margin: 20px;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+
+            /* 🏷️ Navbar Card (Smaller Height) */
+            .navbar-card {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 10px;
+                justify-content: space-between;
+                align-items: center;
+                padding: 10px;
+            }
+            .filter-dropdown select,
+            .form-control {
+                width: 150px;
+                padding: 5px;
+            }
+            .btn {
+                padding: 5px 12px;
+                font-size: 14px;
+            }
+
+            /* 📊 Stat Cards */
+            .stat-card {
+                flex: 1;
+                border-radius: 6px;
+                position: relative;
+                height: 170px; /* Adjusted height to be greater than width */
+            }
+            .blue { background: #daeaf6; color: black;} 
+            .red { background: #ffe2e5; color: black; } 
+            .yellow { background: #fff4de; color: black; } 
+            .green { background: #dcfce7; color: black; } 
+            .orange { background: #ddedea; color: black; } 
+            .burgendi{ background: #f3e8ff; color: black; }
+    
+            /* 📊 Graphs */
+            .chart-container {
+                flex-grow: 1;
+                min-width: 300px; 
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+                overflow: hidden; /* Ensure content does not overflow */
+            }
+
+            .chart-container canvas {
+                width: 100%;
+                height: 100%;
+            }
+
+            /* 🔘 Oval Value Display */
+            .value-oval {
+                width: 70px;
+                height: 40px;
+                background: #e0e0e0;
+                border-radius: 50px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                bottom: 0; /* Ensure it touches the bottom */
+            }
+
+            /* Center the number inside the oval */
+            .value-oval p {
+                padding-top: 5px; /* Adjust as needed */
+                margin: 0;
+            }
+
+            /* 🎯 Percent Badge */
+            .percent-badge {
+                background: rgba(255, 255, 255, 0.9);
+                color: black;
+                padding: 4px 10px;
+                border-radius: 20px;
+                font-size: 12px;
+                font-weight: bold;
+            }
+
+            /* 📊 HR Icon */
+            .hr-icon {
+                font-size: 24px;
+                opacity: 0.8;
+                bottom: 0; /* Ensure it touches the bottom */
+            }
+
+            /* 📱 Mobile Responsive */
+            @media (max-width: 768px) {
+                .big-card {
+                    overflow-y: auto;
+                }
+                .navbar-card {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 8px;
+                }
+                .d-flex.flex-md-nowrap {
+                    flex-direction: column;
+                }
+                .chart-container {
+                    min-width: 100%;
+                    overflow-x: auto;
+                }
+            }
+        </style>
+    </t>
+</templates>

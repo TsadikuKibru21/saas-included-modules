@@ -1,0 +1,67 @@
+/* Dashboard Card Styling */
+.dashboard .card {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    background-color: #ffffff;
+    margin-bottom: 16px;
+}
+
+.dashboard .card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard .card-body {
+    padding: 16px;
+    text-align: center;
+}
+
+.dashboard .card-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 8px;
+}
+
+.dashboard .card-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+/* Chart Container Styling */
+.dashboard .chart-container {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+.dashboard .chart-container h5 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 16px;
+}
+
+/* Responsive Grid Layout */
+.dashboard .row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -8px;
+}
+
+.dashboard .col-md-3,
+.dashboard .col-md-4 {
+    padding: 8px;
+    flex: 1;
+    min-width: 250px;
+}
+
+/* Hover Effects for Charts */
+.dashboard .chart-container:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

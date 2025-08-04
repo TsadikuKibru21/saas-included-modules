@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+POS_Telebirr.access_telebirr_payment,access_telebirr_payment,POS_Telebirr.model_telebirr_payment,point_of_sale.group_pos_manager,1,1,1,1
+POS_Telebirr.access_pos_online_payment,access.pos.online.payment,POS_Telebirr.model_pos_online_payment,point_of_sale.group_pos_manager,1,1,1,1
+POS_Telebirr.access_telebirr_payment_status,access.telebirr.payment.status,POS_Telebirr.model_telebirr_payment_status,point_of_sale.group_pos_manager,1,1,1,1

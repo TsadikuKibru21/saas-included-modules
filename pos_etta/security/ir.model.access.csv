@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_void_reason,access_void_reason,model_void_reason,base.group_user,1,1,1,1
+access_voided_orders,access_voided_orders,model_voided_orders,base.group_user,1,1,1,1
+access_logging_event_model,logging_event_model_access,model_logging_event_model,base.group_user,1,1,1,1
+access_pos_download,pos.log.download.model.access,model_pos_log_download,base.group_user,1,1,1,1

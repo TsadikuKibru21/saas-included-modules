@@ -1,0 +1,39 @@
+<odoo>
+    <template id="custom_footer" inherit_id="website.layout">
+        <xpath expr="//div[hasclass('o_footer_copyright')]" position="before">
+            <t t-set="no_copyright" t-value="True" />
+        </xpath>
+        <xpath expr="//div[@id='footer']" position="replace">
+            <div class="footer-basic">
+                <footer>
+                    <div class="social">
+                        <a href="#">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-snapchat"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-x-twitter"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                    </div>
+                    <ul class="tree-inline">
+                        <li class="tree-inline-item">
+                            <a href="/">Home</a>
+                        </li>
+                        <li class="tree-inline-item">
+                            <a href="/shop">Shop</a>
+                        </li>
+                        <li class="tree-inline-item">
+                            <a href="#">Contact us</a>
+                        </li>
+                    </ul>
+                    <p class="copyright">ETTA Solutions P.L.C. © 2025</p>
+                </footer>
+            </div>
+        </xpath>
+    </template>
+</odoo>

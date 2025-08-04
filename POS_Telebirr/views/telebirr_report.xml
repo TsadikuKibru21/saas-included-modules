@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+  <record id="telebirr_payment_form" model="ir.actions.act_window">
+        <field name="name">PaymentTelebirr</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">telebirr.payment.status</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                No Telebirr Payment Found
+            </p>
+        </field>
+    </record>
+    <record id="telebirr_payment_tree" model="ir.ui.view">
+        <field name="name">payment.telebirr.tree</field>
+        <field name="model">telebirr.payment.status</field>
+        <field name="arch" type="xml">
+            <tree string="Telebirr Report" create="0" sample="1">
+                <field name="phone"/>
+                <field name="trace_number"/>
+                <field name="price"/>
+                <field name="date"/>
+                <field name="status"/>
+
+             
+            </tree>
+        </field>
+    </record>
+    <menuitem id="telebirr_payment" name="Telebirr Report" parent="point_of_sale.menu_point_rep" action="telebirr_payment_form" sequence="11"/>
+
+</odoo>
+
+

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_etta.PartnerListScreen" t-inherit="point_of_sale.PartnerListScreen" t-inherit-mode="extension">
+        <xpath expr="//div[@class='button more-info'][2]" position="attributes">
+            <attribute name="class" separator="remove">button more-info</attribute>
+            <attribute name="class" separator="add">d-none</attribute>
+        </xpath>
+    </t>
+</templates>

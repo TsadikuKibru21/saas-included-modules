@@ -1,0 +1,12 @@
+<templates xml:space="preserve">
+  <t t-name="pos_etta.InfoPopup">
+      <div class="popup">
+          <button class="close-icon" t-on-click="cancel">
+              <i class="fa fa-times"></i>
+          </button>
+          <img src="/pos_etta/static/img/app_logo.png" width="95%" />
+          <h2>ETTA POS v1.0</h2>
+          <h3>Support: info@odooethiopia.com | +251-960-036872</h3>
+      </div>
+  </t>
+</templates>

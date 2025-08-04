@@ -1,0 +1,63 @@
+<odoo>
+    <template id="custom_theme_header" inherit_id="website.layout"
+        name="Custom Theme Header">
+        <xpath expr="//header" position="replace">
+            <header style="z-index: 9999">
+                <nav class="navbar navbar-expand-lg navbar-light py-3"
+                    style="background: linear-gradient(to bottom, #28A9DF, transparent);">
+                    <div class="container ps-2 pe-2">
+                        <a class="navbar-brand" href="/">
+                            <img src="/zoorya_website_front/static/src/img/logo_white.svg"
+                                alt="Logo"
+                                style="height: 25px; max-height: 25px;" />
+                        </a>
+                        <button class="navbar-toggler" type="button"
+                            data-toggle="collapse"
+                            data-target="#navbarSupportedContent"
+                            aria-controls="navbarSupportedContent"
+                            aria-expanded="false"
+                            aria-label="Toggle navigation">
+                            <span class="fa fa-bars" />
+                            <span />
+                        </button>
+                        <div class="collapse navbar-collapse"
+                            id="navbarSupportedContent">
+                            <ul class="navbar-nav mx-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link text-white"
+                                        href="/">
+                                        Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white"
+                                        href="/shop">Shop</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-white"
+                                        href="#">Contact Us</a>
+                                </li>
+                            </ul>
+                            <div class="nav navbar-nav ml-auto" style="z-index: 10000;">
+                                <!--  Sign In  -->
+                                <t t-call="portal.placeholder_user_sign_in">
+                                    <t t-set="_item_class"
+                                        t-value="'nav-item ml-lg-3'" />
+                                    <t t-set="_link_class"
+                                        t-value="'nav-link'" />
+                                </t>
+                                <!--  User Dropdown  -->
+                                <t t-call="portal.user_dropdown">
+                                    <t t-set="_user_name" t-value="True" />
+                                    <t t-set="_item_class"
+                                        t-value="'nav-item dropdown ml-lg-3'" />
+                                    <t t-set="_link_class"
+                                        t-value="'nav-link font-weight-bold'" />
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+        </xpath>
+    </template>
+</odoo>

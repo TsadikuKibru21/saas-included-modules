@@ -1,0 +1,12 @@
+<odoo>
+    <template id="auth_signup_fields_inherit" inherit_id="auth_signup.fields">
+        <xpath expr="//div[@class='mb-3 field-name']" position="after">
+            <div class="mb-3 field-company_name">
+                <label for="company_name">Company Name</label>
+                <input type="text" name="company_name" id="company_name"
+                    class="form-control form-control-sm" placeholder="e.g. ABC P.L.C."
+                    required="required" />
+            </div>
+        </xpath>
+    </template>
+</odoo>

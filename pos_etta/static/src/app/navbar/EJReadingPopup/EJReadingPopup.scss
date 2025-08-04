@@ -1,0 +1,161 @@
+.popup.fiscal-reading-popup {
+    /* Popup window styling */
+    padding: 1rem;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .fiscal-reading .popup-header {
+    margin-bottom: 1rem;
+  
+    h2 {
+      font-size: 1.5rem;
+      color: #333;
+      margin: 0;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #eaeaea;
+    }
+  }
+  
+  .date-range-selector .checkbox-input,
+  .date-range-selector .date-input,
+  .date-range-selector .number-input {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .date-range-selector .checkbox-input label,
+  .date-range-selector .date-input label,
+  .date-range-selector .number-input label {
+    flex: 0 0 120px;
+    /* Assigns a fixed width to the label */
+    margin-right: 10px;
+    /* Space between the label and the input field */
+    font-weight: normal;
+    color: #333;
+  }
+  
+  .date-range-selector .checkbox-input input[type="checkbox"] {
+    margin-right: 0.5rem;
+    accent-color: #007bff;
+  }
+  
+  .date-range-selector input[type="date"],
+  .date-range-selector input[type="number"] {
+    flex: 1;
+    /* Allows the input field to fill the remaining space */
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    font-size: 1.0rem;
+    color: #333;
+  }
+  
+  /* Footer styling */
+  .modal-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-top: 1px solid #eaeaea;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+  
+  .modal-footer .button {
+    padding: 0.6rem 1.2rem;
+    border-radius: 0.25rem;
+    font-weight: bold;
+    border: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .modal-footer .button.close {
+    background-color: #6c757d;
+    /* Bootstrap secondary color */
+    color: white;
+  }
+  
+  .modal-footer .button.close:hover {
+    background-color: darken(#6c757d, 10%);
+  }
+  
+  .modal-footer .button.print {
+    background-color: #007bff;
+    /* Bootstrap primary color */
+    color: white;
+  }
+  
+  .modal-footer .button.print:hover {
+    background-color: darken(#007bff, 10%);
+  }
+  
+  .date-input label i.fa-calendar {
+    margin-right: 5px;
+    /* Adds some space between the icon and the text */
+    color: #555;
+    /* Sets the color of the icon */
+    /* Add any additional styling as needed */
+  }
+  
+  // increase checkbox size
+  .checkbox-input input[type="checkbox"] {
+    /* Scale up the checkbox */
+    transform: scale(1.5);
+    /* You might need to adjust margin or alignment after scaling */
+    margin: 10px;
+  }
+  
+  // style for the notification
+  .o_notification_manager .o_notification.bg-danger {
+    background-color: #f2dede;
+    /* Light red background */
+    color: #a94442;
+    /* Dark red text color */
+    border-left: 5px solid #a94442;
+    /* Thick left border for emphasis */
+    animation: fadeOut ease 5s;
+    /* Fades the notification out */
+  }
+  
+  @keyframes fadeOut {
+    0% {
+      opacity: 1;
+    }
+  
+    80% {
+      opacity: 1;
+    }
+  
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  // footer button style
+  .button i {
+    /* Style for the icon */
+    margin-right: 5px;
+  }
+  
+  .button .key-label {
+    /* Style for the key label (ESC, ENTER) */
+    font-weight: bold;
+  }
+  
+  /* Additional styling to match the provided image */
+  .close {
+    /* Specific styles for the close button */
+    background-color: #d9534f;
+    /* Red color */
+    color: white;
+  }
+  
+  .print {
+    /* Specific styles for the print button */
+    background-color: #5cb85c;
+    /* Green color */
+    color: white;
+  }

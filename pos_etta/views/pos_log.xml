@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_logging_event_model_form" model="ir.ui.view">
+            <field name="name">logging.event.model.form</field>
+            <field name="model">logging.event.model</field>
+            <field name="arch" type="xml">
+                <form string="Log Event">
+                    <sheet>
+                        <group>
+                            <field name="log"/>
+                            <field name="timestamp"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_logging_event_model_list" model="ir.ui.view">
+            <field name="name">logging.event.model.list</field>
+            <field name="model">logging.event.model</field>
+            <field name="arch" type="xml">
+                <tree string="Log Events">
+
+                    <field name="log"/>
+                    <field name="timestamp"/>
+                    <field name="model_name"/>
+                </tree>
+            </field>
+        </record>
+
+                <record model="ir.actions.act_window" id="action_pos_event_log">
+                    <field name="name">POS Event Log</field>
+                    <field name="res_model">logging.event.model</field>
+                    <field name="view_mode">tree,form</field>
+                </record>
+                
+
+        <!-- action="pos_etta.action_my_wizard" -->
+    <menuitem id="menu_action_pos_event_log"
+        action="action_pos_event_log"
+        parent="point_of_sale.menu_point_config_product"
+    sequence="200" />
+    </data>
+</odoo>

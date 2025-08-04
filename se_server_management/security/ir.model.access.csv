@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_server_server_user,server.server.user,model_server_server,base.group_system,1,1,1,1
+access_command_user,command.user,model_server_command,base.group_system,1,1,1,1
+access_se_ssh_auth,se.ssh.auth,model_se_ssh_auth,base.group_system,1,1,1,1
+access_server_info,server.info,model_server_info,base.group_system,1,1,1,1
+
+access_server_db,server.db,model_server_db,base.group_system,1,1,1,1
+
+access_install_odoo,install.odoo,model_install_odoo,base.group_system,1,1,1,1
+

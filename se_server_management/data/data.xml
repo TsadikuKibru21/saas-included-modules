@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding='UTF-8'?>
+<odoo>
+<data >
+
+    <record model="ir.cron" id="compute_system_resources_cron">
+       <field name="name">Calcular Recursos Server</field>
+        <field name="interval_number">10</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+       <field name="model_id" ref="model_server_server"/>
+        <field name="state">code</field>
+        <field name="code">model.compute_system_resources_cron()</field>
+    </record>
+    </data>
+</odoo>

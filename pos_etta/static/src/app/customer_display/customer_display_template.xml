@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_etta.CustomerFacingDisplayHead" t-inherit="point_of_sale.CustomerFacingDisplayHead" t-inherit-mode="extension">
+        <xpath expr="//div[@class='resources']" position="inside">
+            <link rel="stylesheet" type="text/css" href="/pos_etta/static/src/css/customer_facing_display.css" />
+            <link href="/pos_etta/static/src/css/video-js.css" rel="stylesheet" />
+            <script src="/pos_etta/static/lib/video.min.js"></script>
+        </xpath>
+    </t>
+
+    <t t-name="pos_etta.CustomerFacingDisplayMainContainer" t-inherit="point_of_sale.CustomerFacingDisplayOrder" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('pos-odoo_logo_container')]" position="replace">
+        </xpath>
+        <xpath expr="//div[hasclass('pos-customer_facing_display')]" position="replace">
+            <div class="pos-customer_facing_display pos-palette_01">
+
+                <t t-if="order">
+                    <!-- Check if there are no order lines in the order -->
+                    <t t-if="order.get_orderlines().length > 0">
+                        <!-- Only visible in portrait orientation -->
+                        <div class="pos-portrait-top">
+                            <div class="pos-header" t-attf-style="background-image: {{backgroundImageURL}};">
+                                <div class="pos-company_logo" t-attf-style="background-image:url(/logo?company=#{pos.company.id})" />
+                            </div>
+                        </div>
+
+                        <!-- Orderlines -->
+                        <div class="pos-customer_products" name="Products list">
+                            <t t-call="point_of_sale.CustomerFacingDisplayMainContainer" />
+                        </div>
+
+                        <!-- <div class="pos-payment_info" t-attf-style="background-image: {{backgroundImageURL}};"> -->
+                        <div class="pos-payment_info">
+                            <!-- Company Logo only visible in landscape orientation -->
+                            <!-- <div class="pos-company_logo" t-attf-style="background-image:url(/logo?company=#{pos.company.id})" /> -->
+
+                            <div class="pos-payment_info_details">
+                                <!-- Order Total -->
+                                <div class="pos-total">
+                                    <div class="pos-amount-container pos-spaced-line-container">
+                                        <span class="name" style="font-size: 30px;">Total:</span>
+                                        <div class="pos-spaced-line-container">
+                                            <div class="spacer" />
+                                            <span class="pos-total_amount amount" style="font-size: 60px;" t-esc="pos.env.utils.formatCurrency(order and order.get_total_with_tax() || 0)" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Paymentlines -->
+                                <t t-call="point_of_sale.CustomerFacingDisplayPaymentLines" />
+                            </div>
+                            <div style="display: flex; justify-content: center; align-items: center;">
+                                <img src="/pos_etta/static/img/powered_by_etta.gif" width="100%" />
+                            </div>
+                        </div>
+                    </t>
+                    <!-- If there are no order lines, show the no order display template -->
+                    <t t-else="">
+                        <t t-call="point_of_sale.CustomerFacingDisplayNoOrder"/>
+                    </t>
+                </t>
+            </div>
+        </xpath>
+    </t>
+
+    <t t-name="pos_etta.CustomerFacingDisplayPaymentLines" t-inherit="point_of_sale.CustomerFacingDisplayPaymentLines" t-inherit-mode="extension">
+        <xpath expr="//span[@class='name']" position="attributes">
+            <attribute name="style">font-size: 30px;</attribute>
+        </xpath>
+        <xpath expr="//div[hasclass('pos-paymentlines')]" position="replace">
+            <div class="pos-paymentlines">
+                <t t-if="order">
+                    <t t-foreach="order.get_paymentlines()" t-as="paymentline"  t-key="paymentline_index">
+                        <div class="pos-amount-container pos-spaced-line-container">
+                            <span class="name"><t t-esc="paymentline.get_short_name(paymentline.name)" />:</span>
+                            <div class="pos-spaced-line-container">
+                                <div class="spacer" />
+                                <span class="amount" t-esc="pos.env.utils.formatCurrency(paymentline.get_amount())" />
+                            </div>
+                        </div>
+                    </t>
+                </t>
+
+                <div class="pos-amount-container pos-spaced-line-container">
+                    <span class="name">Change:</span>
+                    <div class="spacer" />
+                    <div class="pos-spaced-line-container">
+                        <div class="spacer" />
+                        <span class="amount" t-esc="pos.env.utils.formatCurrency(order and order.get_change() || 0)" />
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </t>
+
+    <t t-name="pos_etta.CustomerFacingDisplayNoOrder" t-inherit="point_of_sale.CustomerFacingDisplayNoOrder" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('pos-customer_facing_display')]" position="replace">
+            <div class="pos-customer_facing_display pos-no-order pos-palette_01">
+                <!-- <video autoplay="true" loop="true" muted="true" playsinline="true" class="pos-customer_facing-video" style="width: 100%; height: 100%; object-fit: cover; object-position: center; overflow: hidden;">
+                    <source t-att-src="'/pos_etta/static/src/video/pos_ad.mp4'" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video> -->
+                <video
+                    id="promo-video"
+                    class="video-js vjs-default-skin pos-customer_facing-video"
+                    autoplay="true"
+                    loop="true"
+                    muted="true"
+                    playsinline="true"
+                    style="width: 100%; height: 100%; object-fit: cover; object-position: center; overflow: hidden;"
+                    data-setup='{}'>
+                    <source t-att-src="'/pos_etta/static/src/video/pos_ad.mp4'" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </xpath>
+    </t>
+</templates>

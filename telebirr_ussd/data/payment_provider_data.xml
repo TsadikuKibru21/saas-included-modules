@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+        <record id="payment_telebirr" model="payment.method">
+            <field name="name">telebirr</field>
+            <field name="code">telebirr_ussd</field>
+            <field name="image" type="base64"
+               file="telebirr_ussd/static/description/icon.png"/>
+        
+        </record>
+        <record id="provider_telebirr" model="payment.provider">
+            <field name="name">Telebirr Payment</field>
+            <field name="code">telebirr_ussd</field>
+            <field name="image_128"
+               type="base64"
+               file="telebirr_ussd/static/description/icon.png"/>
+            <field name="redirect_form_view_id" ref="redirect_form"/>
+        <field name="inline_form_view_id" ref="telebirr_ussd_inline_form_view"/>
+
+            <field name="payment_method_ids"
+                eval="[Command.set([
+                ref('telebirr_ussd.payment_telebirr'),
+                ])]"
+                    />
+   
+        </record>
+
+
+</odoo>

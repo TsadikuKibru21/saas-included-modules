@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_base_saas" model="ir.ui.view">
+            <field name="model">res.partner</field>
+            <field name="name">view.partner.base.saas.form</field>
+            <field name="inherit_id" ref="base.view_partner_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="tin_number" invisible="0" />
+                    <field name="specific_location" invisible="0" />
+                    <field name="tin_certificate" invisible="0" widget="binary_preview" />
+                    <field name="business_license" invisible="0" widget="binary_preview" />
+                    <field name="business_registration" invisible="0" widget="binary_preview" />
+                    <field name="vat_certificate" invisible="0" widget="binary_preview" />
+                    <field name="national_id" invisible="0" widget="binary_preview" />
+                    <field name="delegation_letter" invisible="0" widget="binary_preview" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

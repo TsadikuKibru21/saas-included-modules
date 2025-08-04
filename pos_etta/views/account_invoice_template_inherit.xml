@@ -1,0 +1,85 @@
+<odoo>
+    <template id="inherit_report_posorder_template" inherit_id="account.report_invoice_document">
+
+        <xpath expr="//div[@id='partner_vat_address_not_same_as_shipping']" position="after">
+            <!-- Add the partner's phone number here -->
+            <div t-if="o.partner_id.phone">
+                Phone: <span t-field="o.partner_id.phone"/>
+            </div>
+        </xpath>
+
+        <xpath expr="//div[@name='invoice_date']" position="replace">
+            <t t-if="o.move_type == 'out_invoice'">
+                <strong>Invoice Date:</strong>
+            </t>
+            <t t-elif="o.move_type == 'out_refund'">
+                <strong>Credit Note Date:</strong>
+            </t>
+            <t t-elif="o.move_type == 'out_receipt'">
+                <strong>Receipt Date:</strong>
+            </t>
+            <t t-else="">
+                <strong>Date:</strong>
+            </t>
+            <br />
+            <span t-if="o.pos_order_id" style="margin-right:30px;">
+                <t t-esc="o.pos_order_id.fiscal_date" />
+            </span>
+            <span t-else="" t-field="o.invoice_date" style="margin-right:30px;">2023-09-12</span>
+        </xpath>
+
+        <xpath expr="//div[@name='reference']" position="replace">
+            <strong>Reference:</strong>
+            <br />
+            <span t-if="o.pos_order_id">
+                <t t-esc="o.pos_order_id.pos_reference" />
+            </span>
+            <span t-else="">
+                <t t-esc="o.ref" />
+            </span>
+        </xpath>
+
+        <xpath expr="//div[@name='origin']" position="after">
+
+            <div t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2"
+                name="fs_no" t-if="not o.is_refund">
+                <strong>FS NO:</strong>
+                <br />
+                <span t-field="o.fs_no" />
+            </div>
+            <div t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2"
+                name="rf_no" t-if="o.is_refund">
+                <strong>RF NO:</strong>
+                <br />
+                <span t-field="o.rf_no" />
+            </div>
+            <div t-attf-class="#{'col-auto col-3 mw-100' if report_type != 'html' else 'col'} mb-2"
+                name="mrc">
+                <strong>MRC:</strong>
+                <br />
+                <span t-field="o.fiscal_mrc" />
+            </div>
+
+        </xpath>
+
+        <!-- <xpath expr="//table[@name='invoice_line_table']/thead/tr/th[@name='th_discount']"
+            position="after">
+            <th name="th_service_charge" class="text-end">
+                <span>Service Charge</span>
+            </th>
+        </xpath> -->
+        <!-- <xpath expr="//td[@name='td_discount']" position="after">
+            <td name="td_service_charge" class="text-end o_service_charge">
+                <span class="text-nowrap" t-field="line.service_charge">-</span>
+            </td>
+        </xpath> -->
+
+        <xpath expr="//div[hasclass('page')]" position="inside">
+            <img src="/pos_etta/static/img/attachment12.png" alt="Attachment"
+                style="position:absolute;top:0px; width:1200px;z-index:-1"
+                class="attachment" />
+        </xpath>
+
+    </template>
+
+</odoo>

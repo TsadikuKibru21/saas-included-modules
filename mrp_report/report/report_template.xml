@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Define the QWeb template for the report -->
+<template id="payroll_report_pdf2">
+
+<t t-name="mrp_report.report_production_schedule">
+    <!-- Define the overall layout -->
+    <t t-call="web.external_layout">
+        <div class="page">
+            <!-- Header Section: Logo and Company Name -->
+            <div class="header" style="text-align: center;">
+                <!-- <img src="/module_name/static/img/logo.png" alt="Logo" height="50px"/> -->
+                <h2>Kite Manufacturing PLC / ካይት ማኑፋክቸሪንግ ኃ/የተ/የግ/ማ</h2>
+            </div>
+            
+            <!-- Report Title -->
+            <h3 style="text-align: center; margin-top: 20px;">Daily Production Schedule</h3>
+            <h4 style="text-align: center; margin-bottom: 20px;">CORRUGATOR SCHEDULING</h4>
+            <h4 style="text-align: center; margin-bottom: 20px;"><t t-esc="record.date"/></h4>
+
+            <!-- Table for the report -->
+            <table class="table table-condensed" style="width: 100%; border: 1px solid black; border-collapse: collapse;">
+                <!-- Table Headers -->
+                <thead>
+                    <tr style="background-color: #d3dde3;">
+                        <th style="border: 1px solid black; text-align: center;">S/NO</th>
+                        <th style="border: 1px solid black; text-align: center;">Batch</th>
+                        <th style="border: 1px solid black; text-align: center;">W/O</th>
+                        <th style="border: 1px solid black; text-align: center;">Customer Name</th>
+
+                        <!-- Merged Header for Carton Outer Dimension -->
+                        <th colspan="3" style="border: 1px solid black; text-align: center;">Carton Outer Dimension</th>
+                        
+                        <!-- Merged Header for Finished -->
+                        <th colspan="2" style="border: 1px solid black; text-align: center;">Finished</th>
+
+                        <!-- Merged Header for Crease -->
+                        <th colspan="3" style="border: 1px solid black; text-align: center;">CREASE</th>
+
+                        <th style="border: 1px solid black; text-align: center;">Flaps</th>
+                        <th style="border: 1px solid black; text-align: center;">Flute</th>
+                        <th style="border: 1px solid black; text-align: center;">Type</th>
+                        <th style="border: 1px solid black; text-align: center;">Deckle</th>
+                        <th style="border: 1px solid black; text-align: center;">Reel Size</th>
+                        <th style="border: 1px solid black; text-align: center;">Material</th>
+                        <th style="border: 1px solid black; text-align: center;">Ordered Qty</th>
+                        <th style="border: 1px solid black; text-align: center;">Scheduled Qty</th>
+                        <th style="border: 1px solid black; text-align: center;">Remains</th>
+                        <th style="border: 1px solid black; text-align: center;">No. Cut</th>
+                        <th style="border: 1px solid black; text-align: center;">Qty</th>
+                        <th style="border: 1px solid black; text-align: center;">Lin Meter</th>
+                        <th style="border: 1px solid black; text-align: center;">Print Machine</th>
+                        <th style="border: 1px solid black; text-align: center;">Meter Sq. (m²)</th>
+                        <th style="border: 1px solid black; text-align: center;">Total (Kg)</th>
+                        <th style="border: 1px solid black; text-align: center;">Trim (Kg)</th>
+                    </tr>
+
+                    <!-- Sub-Headers for Carton Outer Dimension, Finished, and Crease -->
+                    <tr style="background-color: #d3dde3;">
+                        <!-- Empty cells for the first columns -->
+                        <th style="border: 1px solid black;"></th>
+                        <th style="border: 1px solid black;"></th>
+                        <th style="border: 1px solid black;"></th>
+                        <th style="border: 1px solid black;"></th>
+
+                        <!-- Carton Outer Dimension Sub-Headers -->
+                        <th style="border: 1px solid black; text-align: center;">Length</th>
+                        <th style="border: 1px solid black; text-align: center;">Width</th>
+                        <th style="border: 1px solid black; text-align: center;">Height</th>
+
+                        <!-- Finished Sub-Headers -->
+                        <th style="border: 1px solid black; text-align: center;">Sheet Length</th>
+                        <th style="border: 1px solid black; text-align: center;">Sheet Width</th>
+
+                        <!-- Crease Sub-Headers -->
+                        <th style="border: 1px solid black; text-align: center;">Left</th>
+                        <th style="border: 1px solid black; text-align: center;">Height</th>
+                        <th style="border: 1px solid black; text-align: center;">Right</th>
+
+                        <!-- Rest of the table remains as it is -->
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Loop through data and generate rows -->
+                    <t t-foreach="lines" t-as="line">
+                        <tr>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.serial_number"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.batch"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.wo"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.customer_name"/></td>
+
+                            <!-- Carton Outer Dimension -->
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.carton_length"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.carton_width"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.carton_height"/></td>
+
+                            <!-- Finished -->
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.sheet_length"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.sheet_width"/></td>
+
+                            <!-- Crease -->
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.crease_left"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.crease_height"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.crease_right"/></td>
+
+                            <!-- Continue with other fields -->
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.flaps"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.flute"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.type"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.deckle"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.reel_size"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.material"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.ordered_qty"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.scheduled_qty"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.remains"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.no_cut"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.qty"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.lin_meter"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.print_machine"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.meter_sq"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.total_kg"/></td>
+                            <td style="border: 1px solid black; text-align: center;"><t t-esc="line.trim_kg"/></td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </t>
+</t>
+    </template>
+</odoo>

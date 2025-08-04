@@ -1,0 +1,131 @@
+<odoo>
+    <template id="get_started_template" name="Get Started">
+        <t t-call="website.layout">
+            <t t-set="title">Zoorya : Get Started with <t t-esc="product.name" /></t>
+
+            <div class="container mt-5">
+                <div class="text-center">
+                    <h2 class="fw-bold">Get Started with <t t-esc="product.name" /></h2>
+                    <input type="hidden" class="saas_product_id" t-att-value="saas_product_id" />
+                    <p class="text-muted">Complete your registration to proceed.</p>
+                </div>
+            </div>
+
+            <div class="stepper-horizontal" id="stepper1">
+                <t t-if="hardware_products">
+                    <div class="step editing">
+                        <div class="step-circle">
+                            <span>1</span>
+                        </div>
+                        <div class="step-title">Supported Hardware</div>
+                        <div class="step-bar-left"></div>
+                        <div class="step-bar-right"></div>
+                    </div>
+                </t>
+                <t
+                    t-if="accessories">
+                    <div class="step">
+                        <div class="step-circle">
+                            <span>2</span>
+                        </div>
+                        <div class="step-title">Accessories</div>
+                        <div class="step-optional">Optional</div>
+                        <div class="step-bar-left"></div>
+                        <div class="step-bar-right"></div>
+                    </div>
+                </t>
+                <t t-if="plans">
+                    <div class="step">
+                        <div class="step-circle">
+                            <span>3</span>
+                        </div>
+                        <div class="step-title">Subscription Plans</div>
+                        <div class="step-bar-left"></div>
+                        <div class="step-bar-right"></div>
+                    </div>
+                </t>
+            </div>
+
+            <!-- Step Content Sections -->
+            <div class="step-content" id="step1-content" style="display: block;">
+                <t t-if="hardware_products">
+                    <div class="product-grid">
+                        <t t-foreach="hardware_products" t-as="hardware">
+                            <div class="product-card mandatory-hardware">
+                                <input type="hidden" class="product_id" t-att-value="hardware.id" />
+                                <img src="https://placehold.co/150" alt="Product Image"
+                                    class="product-image" />
+                                <h3 class="product-name">
+                                    <t t-esc="hardware.name" />
+                                </h3>
+                                <h4 class="price"><t t-esc="hardware.tree_price" /> ETB</h4>
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn decrement">−</button>
+                                    <span class="quantity-value">0</span>
+                                    <button class="quantity-btn increment">+</button>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </div>
+            <div class="step-content" id="step2-content" style="display: none;">
+                <t t-if="accessories">
+                    <div class="product-grid">
+                        <t t-foreach="accessories" t-as="accessory">
+                            <div class="product-card">
+                                <input type="hidden" class="product_id" t-att-value="accessory.id" />
+                                <img src="https://placehold.co/150" alt="Product Image"
+                                    class="product-image" />
+                                <h3 class="product-name">
+                                    <t t-esc="accessory.name" />
+                                </h3>
+                                <h4 class="price"><t t-esc="accessory.tree_price" /> ETB</h4>
+                                <div class="quantity-controls">
+                                    <button class="quantity-btn decrement">−</button>
+                                    <span class="quantity-value">0</span>
+                                    <button class="quantity-btn increment">+</button>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+            </div>
+            <div class="step-content" id="step3-content" style="display: none;">
+                <t t-if="plans">
+                    <div class="product-grid">
+                        <t t-foreach="plans" t-as="plan">
+                            <div class="sproduct-card">
+                                <h3 class="product-name">
+                                    <t t-esc="plan['name']" />
+                                </h3>
+                                <h4 class="price"><t t-esc="plan['price']" /> ETB</h4>
+                                <p style="text-align: center;">
+                                    <t t-esc="plan['billing_period_display_sentence']" />
+                                </p>
+                                <div class="checkbox-selection">
+                                    <input type="radio" name="subscription_plan"
+                                        t-att-value="plan['plan_id']" class="plan-checkbox" />
+                                    <label t-att-for="plan['plan_id']">Select this plan</label>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </t>
+                <t t-else="">
+                    <div class="no-plans-message text-center">
+                        <h3 class="text-muted">Subscription plan not yet configured.</h3>
+                    </div>
+                </t>
+            </div>
+
+            <div class="text-center mt-4">
+                <button class="btn btn-primary" id="nextBtn" style="visibility: visible;">Next</button>
+            </div>
+
+            <div class="text-center mt-4">
+                <button class="btn btn-primary" id="proceed-checkout-btn" style="visibility: hidden;">Proceed to Checkout</button>
+            </div>
+        </t>
+    </template>
+</odoo>

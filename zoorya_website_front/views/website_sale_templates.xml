@@ -1,0 +1,115 @@
+<odoo>
+    <template id="option_icon_pack_1" inherit_id="website.layout" active="True">
+        <xpath expr="//head/link[last()]" position="after">
+            <link rel="stylesheet"
+                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        </xpath>
+    </template>
+    <template id="custom_checkout_fields" inherit_id="website_sale.extra_info">
+        <xpath expr="//section[@class='s_website_form']" position="replace">
+            <section>
+                <div class="container">
+                    <form action="/website/submit_custom_checkout" method="POST"
+                        enctype="multipart/form-data">
+                        <div class="row">
+                            <t t-set="fields"
+                                t-value="[ 
+                            ('tin_number', 'TIN No', 'text'),
+                            ('specific_location', 'Specific Location', 'text'),
+                            ('tin_certificate', 'TIN Certificate', 'file'),
+                            ('business_license', 'Business License', 'file'),
+                            ('business_registration', 'Business Registration', 'file'),
+                            ('vat_certificate', 'VAT Certificate', 'file'),
+                            ('national_id', 'National ID Card of Manager or Delegate', 'file'),
+                            ('delegation_letter', 'Documents Authentication and Registration Delegation Letter', 'file')
+                        ]" />
+
+                            <t t-foreach="fields" t-as="field">
+                                <div class="col-lg-6 mb-3 s_website_form_field">
+                                    <label t-att-for="field[0]">
+                                        <t t-esc="field[1]" />
+                                    </label>
+
+                                    <t t-if="field[2] == 'text'">
+                                        <input type="text" t-att-name="field[0]"
+                                            class="form-control"
+                                            t-att-value="custom_fields.get(field[0], '')" />
+                                    </t>
+
+                                    <t t-if="field[2] == 'file'">
+                                        <input type="file" t-att-name="field[0]"
+                                            class="form-control file-input"
+                                            accept="image/*,application/pdf" data-max-size="2097152" />
+                                    </t>
+                                </div>
+                            </t>
+                        </div>
+
+                        <!-- Uploaded Files Section (NOW placed before Submit Button) -->
+                        <t
+                            t-if="any(custom_fields.get(field[0]) for field in fields if field[2] == 'file')">
+                            <div class="mt-4">
+                                <h5>Uploaded Documents</h5>
+                                <div class="row">
+                                    <t t-foreach="fields" t-as="field">
+                                        <t t-if="field[2] == 'file' and custom_fields.get(field[0])">
+                                            <div class="col-lg-4 mb-3">
+                                                <div class="border p-2 text-center">
+                                                    <t t-set="file_data"
+                                                        t-value="custom_fields.get(field[0]).decode('utf-8')" />
+                                                    <t t-if="file_data.startswith('/')">
+                                                        <!-- PDF Handling -->
+                                                        <a
+                                                            t-att-href="'data:application/pdf;base64,' + file_data"
+                                                            target="_blank" class="btn btn-link">
+                                                            <i class="fa fa-file-pdf text-danger"></i>
+                                                            <t t-esc="field[1]" />
+                                                        </a>
+                                                    </t>
+                                                    <t t-else="">
+                                                        <!-- Image Handling -->
+                                                        <a
+                                                            t-att-href="'data:image/png;base64,' + file_data"
+                                                            target="_blank">
+                                                            <img
+                                                                t-att-src="'data:image/png;base64,' + file_data"
+                                                                class="img-thumbnail"
+                                                                style="max-width: 200px; max-height: 200px;" />
+                                                        </a>
+                                                        <p class="text-muted small mb-0">
+                                                            <t t-esc="field[1]" />
+                                                        </p>
+                                                    </t>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </t>
+                                </div>
+                            </div>
+                        </t>
+
+                        <!-- Submit Button Section -->
+                        <div class="d-flex flex-column flex-lg-row align-items-lg-center pt-4">
+                            <button type="submit"
+                                class="btn btn-primary order-lg-3 w-100 w-lg-auto ms-lg-auto">
+                                Continue checkout <i class="fa fa-angle-right ms-2 fw-light" />
+                            </button>
+
+                            <div
+                                class="position-relative d-flex d-lg-none w-100 justify-content-center align-items-center my-2 opacity-75">
+                                <hr class="w-100" />
+                                <span class="px-3">or</span>
+                                <hr class="w-100" />
+                            </div>
+
+                            <a href="/shop/checkout" class="text-center">
+                                <i class="fa fa-angle-left me-2 fw-light" /> Return to shipping </a>
+                            <span id="s_website_form_result" />
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </xpath>
+    </template>
+
+</odoo>

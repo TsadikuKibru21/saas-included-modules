@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="report_mrp_document1" model="ir.actions.report">
+            <field name="name">mrp report Excell</field>
+            <field name="model">mrp.production.group</field>
+            <field name="report_type">xlsx</field>
+            <field name="report_name">mrp_report.report_mrp_document</field>
+            <field name="report_file">mrp_report.report_mrp_document</field>
+            <field name="print_report_name">'mrp - %s' % (object.reference)</field>
+            <field name="binding_model_id" ref="kite_mrp.model_mrp_production_group"/>
+        </record>
+
+
+       
+
+   <!-- <record id="payroll_report_pdf" model="ir.actions.report">
+       <field name="name">mrp report PDF</field>
+       <field name="model">mrp.production.group</field>
+       <field name="report_type">qweb-pdf</field>
+       <field name="report_name">mrp_report.payroll_report_pdf2</field>
+       <field name="report_file">mrp_report.payroll_report_pdf2</field>
+       <field name="print_report_name">'Product Report - %s' % (object.name)</field>
+       <field name="binding_model_id" ref="kite_mrp.model_mrp_production_group"/>
+       
+   </record> -->
+
+
+    </data>
+</odoo>

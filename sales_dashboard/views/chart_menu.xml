@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+<record id="action_chart_js" model="ir.actions.client">
+        <field name="name">Chart js Sample</field>
+        <field name="tag">chartjs_sample</field>
+        <field name="target"></field>
+
+    </record>
+
+  
+
+<menuitem id="menu_chart_js_sample" parent="sale.sale_menu_root" action="action_chart_js"
+              name="Dashboard" sequence="1"/>
+             
+
+</odoo>
